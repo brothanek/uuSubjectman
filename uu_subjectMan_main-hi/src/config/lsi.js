@@ -14,6 +14,20 @@ const Lsi = {
       en: "About Application",
     },
   },
+  top: {
+    home: {
+      cs: "Domů",
+      en: "Home",
+    },
+    edit: {
+      cs: "Upravit",
+      en: "Edit",
+    },
+    about: {
+      cs: "O aplikaci",
+      en: "About",
+    },
+  },
 
   about: {
     header: {
