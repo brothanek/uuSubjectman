@@ -6,12 +6,25 @@ export const subjects = [
   { id: 5, topicName: "Mathematics 3" },
 ];
 
-export const subjectData = {
-  name: "Project management", 
-  credits: 5, 
-  degree: "bc", 
-  languages: ["CZ"], 
-  desc: "brief subject's overview",
-  topicIdList: [1], 
-  state: "active",
-};
+export const subjectData = [
+  {
+    id: 1,
+    topicName: "Javascript",
+    credits: 5,
+    degree: "bc",
+    languages: ["CZ"],
+    description: "brief subject's overview",
+    topicIdList: [1],
+    state: "active",
+  },
+  {
+    id: 2,
+    topicName: "Mathematics",
+    credits: 8,
+    degree: "bc",
+    languages: ["CZ", "EN"],
+    description: "brief subject's overview",
+    topicIdList: [1],
+    state: "active",
+  },
+];

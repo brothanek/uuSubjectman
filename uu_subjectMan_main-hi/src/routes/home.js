@@ -4,9 +4,9 @@ import "uu5g04-bricks";
 import { createVisualComponent } from "uu5g04-hooks";
 import Plus4U5 from "uu_plus4u5g01";
 import "uu_plus4u5g01-bricks";
+import SubjectList from "../pages/subjects/subject_list/SubjectList.js";
 
 import Config from "./config/config.js";
-import SubjectList from "../components/SubjectList.js";
 //@@viewOff:imports
 
 const STATICS = {

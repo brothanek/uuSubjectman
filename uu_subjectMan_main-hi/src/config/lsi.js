@@ -4,6 +4,24 @@ const Lsi = {
     en: "Application uuSubjectMan",
   },
 
+  subjectList: {
+    header: { cs: "Seznam předmětů", en: "Subject list" },
+    name: { cs: "Název", en: "Name" },
+  },
+  subject: {
+    edit: {
+      cs: "Upravit",
+      en: "Edit",
+    },
+    cancel: {
+      cs: "Ukončit",
+      en: "Cancel",
+    },
+    submit: {
+      cs: "Potvrdit",
+      en: "Submit",
+    },
+  },
   left: {
     home: {
       cs: "Vítejte",
@@ -18,10 +36,6 @@ const Lsi = {
     home: {
       cs: "Domů",
       en: "Home",
-    },
-    edit: {
-      cs: "Upravit",
-      en: "Edit",
     },
     about: {
       cs: "O aplikaci",
