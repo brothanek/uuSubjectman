@@ -1,30 +1,30 @@
 export const subjects = [
-  { id: 1, topicName: "Javascript" },
-  { id: 2, topicName: "Economics" },
-  { id: 3, topicName: "Mathematics 1" },
-  { id: 4, topicName: "Mathematics 2" },
-  { id: 5, topicName: "Mathematics 3" },
+  { id: 1, subjectName: "Javascript" },
+  { id: 2, subjectName: "Economics" },
+  { id: 3, subjectName: "Mathematics 1" },
+  { id: 4, subjectName: "Mathematics 2" },
+  { id: 5, subjectName: "Mathematics 3" },
 ];
 
 export const subjectData = [
   {
     id: 1,
-    topicName: "Javascript",
+    subjectName: "Javascript",
     credits: 5,
     degree: "bc",
     languages: ["CZ"],
     description: "brief subject's overview",
-    topicIdList: [1],
+    topicIdList: ["1"],
     state: "active",
   },
   {
     id: 2,
-    topicName: "Mathematics",
+    subjectName: "Mathematics",
     credits: 8,
     degree: "bc",
     languages: ["CZ", "EN"],
     description: "brief subject's overview",
-    topicIdList: [1],
+    topicIdList: ["2"],
     state: "active",
   },
 ];

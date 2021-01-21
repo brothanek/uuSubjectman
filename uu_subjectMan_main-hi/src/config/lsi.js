@@ -14,7 +14,7 @@ const Lsi = {
       en: "Edit",
     },
     cancel: {
-      cs: "Ukončit",
+      cs: "Zrušit",
       en: "Cancel",
     },
     submit: {

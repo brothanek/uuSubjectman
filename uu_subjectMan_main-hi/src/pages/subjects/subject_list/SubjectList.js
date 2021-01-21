@@ -26,14 +26,14 @@ function SubjectList() {
 
         <UU5.Bricks.Table.TBody>
           {subjectData.map((col) => {
-            const { credits, topicName, id, degree, languages, state } = col;
+            const { credits, subjectName, id, degree, languages, state } = col;
             return (
               <UU5.Bricks.Table.Tr>
                 <UU5.Bricks.Table.Td
                   content={
                     <UU5.Bricks.Link
                       onClick={() => UU5.Environment.getRouter().setRoute("subject", col)}
-                      content={topicName}
+                      content={subjectName}
                     />
                   }
                 />

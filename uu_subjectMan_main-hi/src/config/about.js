@@ -47,7 +47,7 @@ export const About = {
     },
     {
       name: "Radek Svoboda",
-      uuIdentity: "4-4-1",
+      uuIdentity: "25-221-1",
     },
   ],
   usedTechnologies: {
