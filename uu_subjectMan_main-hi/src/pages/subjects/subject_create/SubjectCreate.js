@@ -11,7 +11,7 @@ function SubjectCreate() {
     console.log(values);
 
     UU5.Environment.getPage().getAlertBus().addAlert({
-      content: `Creation of succeeded!`,
+      content: `Creation succeeded!`,
       colorSchema: "green",
     });
     UU5.Environment.getRouter().setRoute("home");

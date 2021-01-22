@@ -9,7 +9,7 @@ export const subjects = [
 export const subjectData = [
   {
     id: 1,
-    subjectName: "Javascript",
+    subjectName: "Software development",
     credits: 5,
     degree: "bc",
     languages: ["CZ"],
@@ -26,5 +26,18 @@ export const subjectData = [
     description: "brief subject's overview",
     topicIdList: ["2"],
     state: "active",
+  },
+];
+
+export const topicData = [
+  {
+    id: 1,
+    topicName: "Javascript",
+    contentIdList: ["12", "23"],
+  },
+  {
+    id: 2,
+    topicName: "Graph theorem",
+    contentIdList: ["1", "2"],
   },
 ];

@@ -9,8 +9,8 @@ function Subject({ params }) {
   const [values, setValues] = useState(params);
   const { id, subjectName, credits, degree, languages, description, topicIdList, state } = values;
 
-  const submitBtn = useLsi(Lsi.subject.submit);
-  const editBtn = edit ? useLsi(Lsi.subject.cancel) : useLsi(Lsi.subject.edit);
+  const submitBtn = useLsi(Lsi.common.submit);
+  const editBtn = edit ? useLsi(Lsi.common.cancel) : useLsi(Lsi.common.edit);
 
   const propsForEditable = { edit, setEdit, setValues, values };
 
@@ -32,7 +32,7 @@ function Subject({ params }) {
       <UU5.Bricks.Header
         level="1"
         content={
-          <div style={{ fontSize: "50px", marginLeft:"100px" }}>
+          <div style={{ fontSize: "50px", marginLeft: "100px" }}>
             <Editable edit={edit} setEdit={setEdit} setValues={setValues} values={values} valueType="subjectName">
               {subjectName || ""}
             </Editable>

@@ -13,10 +13,10 @@ function SubjectList() {
         onClick={() => UU5.Environment.getRouter().setRoute("subject_create")}
         content={"Add new Subject"}
       />
-      <UU5.Bricks.Table hover condensed header={useLsi(Lsi.subjectList.header)}>
+      <UU5.Bricks.Table hover condensed header={useLsi(Lsi.subject.subjectList.header)}>
         <UU5.Bricks.Table.THead>
           <UU5.Bricks.Table.Tr>
-            <UU5.Bricks.Table.Th content={useLsi(Lsi.subjectList.name)} />
+            <UU5.Bricks.Table.Th content={useLsi(Lsi.common.name)} />
             <UU5.Bricks.Table.Th content="Credits" />
             <UU5.Bricks.Table.Th content="Degree" />
             <UU5.Bricks.Table.Th content="State" />

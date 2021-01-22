@@ -7,14 +7,15 @@ import Plus4U5 from "uu_plus4u5g01";
 import "uu_plus4u5g01-app";
 
 import Config from "./config/config";
-import Left from "./left";
 import Top from "./top";
 
 import Bottom from "./bottom";
 import Home from "../routes/home";
-import Topic from "../components/Topic";
 import Subject from "../pages/subjects/subject_view/Subject";
 import SubjectCreate from "../pages/subjects/subject_create/SubjectCreate";
+import TopicList from "../pages/topics/topic_list/TopicList";
+import TopicCreate from "../pages/topics/topic_create/TopicCreate";
+import Topic from "../pages/topics/topic_view/Topic";
 //@@viewOff:imports
 
 const STATICS = {
@@ -33,8 +34,10 @@ const ROUTES = {
   home: { component: <Home /> },
   about: { component: <About /> },
   subject: { component: <Subject /> },
+  topics: { component: <TopicList /> },
   topic: { component: <Topic /> },
   subject_create: { component: <SubjectCreate /> },
+  topic_create: { component: <TopicCreate /> },
 
   "sys/uuAppWorkspace/initUve": { component: <InitAppWorkspace /> },
   controlPanel: { component: <ControlPanel /> },
