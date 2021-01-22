@@ -44,6 +44,10 @@ function SubjectCreate() {
           patternMessage="Insert numbers only"
           required
         />
+        <UU5.Forms.Select label="Degree" name="degree" placeholder="Bc or Ing" required>
+          <UU5.Forms.Select.Option value="ing" />
+          <UU5.Forms.Select.Option value="bc" />
+        </UU5.Forms.Select>
 
         <UU5.Forms.Select label="Languages" name="languages" placeholder="EN or CZ" required>
           <UU5.Forms.Select.Option value="CZ" />
