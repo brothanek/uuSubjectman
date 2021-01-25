@@ -2,7 +2,7 @@
   "{vendor}-{uuApp}-{uuSubApp}": {
     "useCaseMap": {
       "sys/uuAppWorkspace/init": {
-        "realization": "api/controllers/SubjectManMainController.init",
+        "realization": "api/controllers/SubjectmanMainController.init",
         "httpMethod": "POST",
         "type": "CMD"
       },

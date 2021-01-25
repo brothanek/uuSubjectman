@@ -1,10 +1,10 @@
 "use strict";
-const SubjectManMainUseCaseError = require("./subjectman-main-use-case-error.js");
+const SubjectmanMainUseCaseError = require("./subjectman-main-use-case-error.js");
 
 const Init = {
-  UC_CODE: `${SubjectManMainUseCaseError.ERROR_PREFIX}init/`,
+  UC_CODE: `${SubjectmanMainUseCaseError.ERROR_PREFIX}init/`,
 
-  InvalidDtoIn: class extends SubjectManMainUseCaseError {
+  InvalidDtoIn: class extends SubjectmanMainUseCaseError {
     constructor() {
       super(...arguments);
       this.code = `${Init.UC_CODE}invalidDtoIn`;
@@ -12,7 +12,7 @@ const Init = {
     }
   },
 
-  SchemaDaoCreateSchemaFailed: class extends SubjectManMainUseCaseError {
+  SchemaDaoCreateSchemaFailed: class extends SubjectmanMainUseCaseError {
     constructor() {
       super(...arguments);
       this.status = 500;
@@ -21,7 +21,7 @@ const Init = {
     }
   },
 
-  SetProfileFailed: class extends SubjectManMainUseCaseError {
+  SetProfileFailed: class extends SubjectmanMainUseCaseError {
     constructor() {
       super(...arguments);
       this.code = `${Init.UC_CODE}sys/setProfileFailed`;
@@ -29,7 +29,7 @@ const Init = {
     }
   },
 
-  CreateAwscFailed: class extends SubjectManMainUseCaseError {
+  CreateAwscFailed: class extends SubjectmanMainUseCaseError {
     constructor() {
       super(...arguments);
       this.code = `${Init.UC_CODE}createAwscFailed`;

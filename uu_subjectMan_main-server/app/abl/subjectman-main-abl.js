@@ -14,9 +14,9 @@ const WARNINGS = {
   },
 };
 
-const logger = LoggerFactory.get("SubjectManMainAbl");
+const logger = LoggerFactory.get("SubjectmanMainAbl");
 
-class SubjectManMainAbl {
+class SubjectmanMainAbl {
   constructor() {
     this.validator = Validator.load();
   }
@@ -52,7 +52,7 @@ class SubjectManMainAbl {
       const uuBtBaseUri = uuBtUriBuilder.toUri().getBaseUri();
 
       const createAwscDtoIn = {
-        name: "UuSubjectMan",
+        name: "UuSubjectman",
         typeCode: "uu-subjectMan-main",
         location: location,
         uuAppWorkspaceUri: baseUri,
@@ -114,4 +114,4 @@ class SubjectManMainAbl {
   }
 }
 
-module.exports = new SubjectManMainAbl();
+module.exports = new SubjectmanMainAbl();

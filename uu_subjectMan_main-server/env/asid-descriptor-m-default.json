@@ -4,7 +4,7 @@
   "uuSubApp": {
     "code": "UU.SUBJECTMAN.MAIN",
     "version": "0.1.0",
-    "name": "uuSubjectManMain",
+    "name": "uuSubjectmanMain",
     "description": "",
     "license": "License Commercial",
     "asidRequired": true,

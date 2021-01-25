@@ -2,7 +2,7 @@
 // Manual changes to this file are discouraged, if values are inconsistent with package.json setting.
 import UU5 from "uu5g04";
 
-const TAG = "UuSubjectMan.";
+const TAG = "UuSubjectman.";
 
 export default {
   TAG,

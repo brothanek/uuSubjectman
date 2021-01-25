@@ -5,7 +5,7 @@
       "realization": "MongoDB",
       "schemaMap": {
         "subjectManMain": {
-          "realization": "dao/SubjectManMainMongo"
+          "realization": "dao/SubjectmanMainMongo"
         }
       }
     }

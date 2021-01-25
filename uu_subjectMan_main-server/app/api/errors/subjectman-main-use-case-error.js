@@ -1,7 +1,7 @@
 "use strict";
 const { UseCaseError } = require("uu_appg01_server").AppServer;
 
-class SubjectManMainUseCaseError extends UseCaseError {
+class SubjectmanMainUseCaseError extends UseCaseError {
   static get ERROR_PREFIX() {
     return "uu-subjectMan-main/";
   }
@@ -15,4 +15,4 @@ class SubjectManMainUseCaseError extends UseCaseError {
   }
 }
 
-module.exports = SubjectManMainUseCaseError;
+module.exports = SubjectmanMainUseCaseError;

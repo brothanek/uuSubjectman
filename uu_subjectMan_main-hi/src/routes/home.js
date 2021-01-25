@@ -21,13 +21,13 @@ const CLASS_NAMES = {
     max-width: 624px;
     margin: 0 auto;
     text-align: center;
-  
+
     ${UU5.Utils.ScreenSize.getMinMediaQueries("s", `text-align: left;`)}
-  
+
     .uu5-bricks-header {
       margin-top: 8px;
     }
-    
+
     .plus4u5-bricks-user-photo {
       margin: 0 auto;
     }
@@ -54,7 +54,7 @@ export const Home = createVisualComponent({
     const attrs = UU5.Common.VisualComponent.getAttrs(props);
     return (
         <div {...attrs}>
-          Welcome to uuSubjectMan
+          Welcome to uuSubjectman
 
          <SubjectList />
         </div>

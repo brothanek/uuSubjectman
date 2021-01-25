@@ -1,7 +1,7 @@
 const Lsi = {
   appName: {
-    cs: "Aplikace uuSubjectMan",
-    en: "Application uuSubjectMan",
+    cs: "Aplikace uuSubjectman",
+    en: "Application uuSubjectman",
   },
   common: {
     edit: {
@@ -59,8 +59,8 @@ const Lsi = {
 
   about: {
     header: {
-      cs: "O aplikaci uuSubjectMan",
-      en: "About application uuSubjectMan",
+      cs: "O aplikaci uuSubjectman",
+      en: "About application uuSubjectman",
     },
     creatorsHeader: {
       cs: "Tvůrci aplikace",
@@ -161,12 +161,12 @@ const Lsi = {
 
   unauthInit: {
     buyYourOwn: {
-      cs: "Můžete si koupit vlastní uuSubjectMan.",
-      en: "You can buy your own uuSubjectMan.",
+      cs: "Můžete si koupit vlastní uuSubjectman.",
+      en: "You can buy your own uuSubjectman.",
     },
     notAuthorized: {
-      cs: "Nemáte právo inicializovat tuto aplikaci uuSubjectMan.",
-      en: "You don't have rights to initialize this uuSubjectMan.",
+      cs: "Nemáte právo inicializovat tuto aplikaci uuSubjectman.",
+      en: "You don't have rights to initialize this uuSubjectman.",
     },
   },
 

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "",
   "license": "License Commercial",
-  "namespace": "UuSubjectMan",
+  "namespace": "UuSubjectman",
   "spec": "uu5-app; uu_appg01@3.1.0",
   "dependencies": {
     "systemjs": "0.19.47",
