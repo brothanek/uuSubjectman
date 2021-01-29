@@ -1,17 +1,19 @@
 {
-  "product": "uu_subjectMan_main",
-  "version": "0.1.0",
+  "product": "uu_subjectman_maing01",
+  "version": "0.1.0-DEV",
   "license": "License Commercial",
   "description": {
-    "en": "",
-    "cs": ""
+    "en": "Application for school subject management",
+    "cs": "Aplikácia pre správu vyučovaných predmetov"
   },
-  "uu_subjectMan_main-hi": {},
+  "uu_subjectMan_main-hi": {
+    "namespace": "UuSubjectman"
+  },
   "uu_subjectMan_main-server": {
     "devkit": {
       "development": {
-        "appBoxLocationUri": "----- VALUE REQUIRED -----",
-        "appDeploymentUri": null
+        "appBoxLocationUri": "ues:UCL-BT:OPR.RSP/APPBOXES",
+        "appDeploymentUri": "ues:UCL-BT[118500965363973101]:UUN_STUDENTS02_AWE[5f9fea3cf439f9fab6743986]:UUN.BPMI20WPT03.MAING01[60141b52f439f9f08b74bce2]"
       }
     }
   }

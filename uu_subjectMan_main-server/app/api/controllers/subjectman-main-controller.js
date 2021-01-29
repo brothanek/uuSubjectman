@@ -8,4 +8,3 @@ class SubjectmanMainController {
 }
 
 module.exports = new SubjectmanMainController();
-

@@ -15,6 +15,16 @@
         "realization": "index.html",
         "httpMethod": "GET",
         "type": "UVE"
+      },
+      "subject/create": {
+        "realization": "api/controllers/SubjectController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "subject/get": {
+        "realization": "api/controllers/SubjectController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
       }
     }
   }

@@ -6,6 +6,22 @@
       "schemaMap": {
         "subjectManMain": {
           "realization": "dao/SubjectmanMainMongo"
+        },
+        "subjectManInstance": {
+          "realization": "dao/SubjectmanInstanceMongo",
+          "maxNoi": 1
+        },
+        "subject": {
+          "realization": "dao/SubjectMongo",
+          "maxNoi": 300
+        },
+        "topic": {
+          "realization": "dao/TopicMongo",
+          "maxNoi": 150
+        },
+        "digitalContent": {
+          "realization": "dao/DigitalContentMongo",
+          "maxNoi": 2000
         }
       }
     }
