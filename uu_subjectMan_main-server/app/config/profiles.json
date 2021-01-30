@@ -72,6 +72,14 @@
       "subject/create": {
         "sysStateList": ["active"],
         "profileList": ["Authorities","Executives","Teachers","HeadMasters"]
+      },
+      "subject/get": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives","Teachers","HeadMasters","Students"]
+      },
+      "subject/remove": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives","Teachers","HeadMasters"]
       }
     }
   }
