@@ -1,10 +1,18 @@
 "use strict";
-const SubjectmanMainUseCaseError = require("./subjectman-main-use-case-error.js");
+const SubjectmanUseCaseError = require("./subjectman-main-use-case-error.js");
 
 const Init = {
-  UC_CODE: `${SubjectmanMainUseCaseError.ERROR_PREFIX}init/`,
+  UC_CODE: `${SubjectmanUseCaseError.ERROR_PREFIX}init/`,
 
-  InvalidDtoIn: class extends SubjectmanMainUseCaseError {
+  SubjectmanInstanceAlreadyInitialized: class extends SubjectmanUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Init.UC_CODE}subjectManInstanceAlreadyInitialized`;
+      this.message = "Subjectman is already initialized.";
+    }
+  },
+
+  InvalidDtoIn: class extends SubjectmanUseCaseError {
     constructor() {
       super(...arguments);
       this.code = `${Init.UC_CODE}invalidDtoIn`;
@@ -12,7 +20,7 @@ const Init = {
     }
   },
 
-  SchemaDaoCreateSchemaFailed: class extends SubjectmanMainUseCaseError {
+  SchemaDaoCreateSchemaFailed: class extends SubjectmanUseCaseError {
     constructor() {
       super(...arguments);
       this.status = 500;
@@ -21,7 +29,7 @@ const Init = {
     }
   },
 
-  SetProfileFailed: class extends SubjectmanMainUseCaseError {
+  SetProfileFailed: class extends SubjectmanUseCaseError {
     constructor() {
       super(...arguments);
       this.code = `${Init.UC_CODE}sys/setProfileFailed`;
@@ -29,15 +37,48 @@ const Init = {
     }
   },
 
-  CreateAwscFailed: class extends SubjectmanMainUseCaseError {
+  CreateAwscFailed: class extends SubjectmanUseCaseError {
     constructor() {
       super(...arguments);
       this.code = `${Init.UC_CODE}createAwscFailed`;
       this.message = "Create uuAwsc failed.";
     }
   },
+  SubjectmanInstanceDaoCreateFailed: class extends SubjectmanUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Init.UC_CODE}subjectManInstanceDaoCreateFailed`;
+      this.message = "Create subjectmanInstance by subjectmanInstance DAO create failed.";
+    }
+  },
+};
+
+const Load = {
+  UC_CODE: `${SubjectmanUseCaseError.ERROR_PREFIX}load/`,
+  SubjectmanDoesNotExist: class extends SubjectmanUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Load.UC_CODE}subjectManDoesNotExist`;
+      this.message = "Subjectman does not exist.";
+    }
+  },
+  SubjectmanNotInProperState: class extends SubjectmanUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Load.UC_CODE}subjectManNotInProperState`;
+      this.message = "Subjectman is not in proper state [active|underConstruction].";
+    }
+  },
+  SubjectmanIsUnderConstruction: class extends SubjectmanUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Load.UC_CODE}subjectManIsUnderConstruction`;
+      this.message = "Subjectman is in state underConstruction.";
+    }
+  },
 };
 
 module.exports = {
   Init,
+  Load
 };

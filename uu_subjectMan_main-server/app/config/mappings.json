@@ -6,6 +6,11 @@
         "httpMethod": "POST",
         "type": "CMD"
       },
+      "subjectManInstance/load": {
+        "realization": "api/controllers/SubjectmanMainController.load",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
       "defaultUve": {
         "realization": "index.html",
         "httpMethod": "GET",
@@ -24,6 +29,11 @@
       "subject/get": {
         "realization": "api/controllers/SubjectController.get",
         "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "digitalContent/create": {
+        "realization": "api/controllers/DigitalContentController.create",
+        "httpMethod": "POST",
         "type": "CMD"
       }
     }

@@ -1,7 +1,7 @@
 "use strict";
 const { UuObjectDao } = require("uu_appg01_server").ObjectStore;
 
-class SubjectmanMainMongo extends UuObjectDao {
+class SubjectmanMongo extends UuObjectDao {
   async createSchema() {
     await super.createIndex({ awid: 1 }, { unique: true });
   }
@@ -41,4 +41,4 @@ class SubjectmanMainMongo extends UuObjectDao {
   }
 }
 
-module.exports = SubjectmanMainMongo;
+module.exports = SubjectmanMongo;

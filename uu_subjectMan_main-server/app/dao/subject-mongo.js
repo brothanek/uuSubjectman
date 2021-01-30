@@ -8,6 +8,8 @@ class SubjectMongo extends UuObjectDao {
   async createSchema() {
     await super.createIndex({ awid: 1, _id: 1 }, { unique: true });
     await super.createIndex({ awid: 1, topicIdList: 1 });
+    await super.createIndex({ awid: 1, topicIdList: 1 });
+    await super.createIndex({ awid: 1, topicIdList: 1 });
   }
 
   async create(uuObject) {

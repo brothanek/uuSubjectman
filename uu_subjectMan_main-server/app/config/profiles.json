@@ -1,11 +1,10 @@
 {
   "{asid}": {
     "profileList": ["AsidAuthorities","AsidLicenseOwner"],
-    "useCaseMap": {
-    }
+    "useCaseMap": {}
   },
   "*": {
-    "profileList": ["Authorities", "Executives", "AwidLicenseOwner", "Readers"],
+    "profileList": ["Authorities","Executives","AwidLicenseOwner","Students","Teachers","HeadMasters","Public"],
     "useCaseMap": {
       "sys/uuAppWorkspace/init": {
         "sysStateList": ["created"],
@@ -16,30 +15,24 @@
       },
       "sys/uuAppWorkspace/initUve": {
         "sysStateList": ["created"],
-        "profileList": ["Public", "AwidLicenseOwner"]
+        "profileList": ["Public","AwidLicenseOwner"]
       },
-      "subjectManInstance/init": { "profileList": ["AwidLicenseOwner"] },
-      "subjectManInstance/load": { "profileList": ["Authorities", "Executives", "Readers"]},
-      "subjectManInstance/edit": { "profileList": ["Authorities","AwidLicenseOwner"]},
-      "subjectManInstance/setState": { "profileList": ["AwidLicenseOwner"]},
-
-      "subject/create": { "profileList": ["Authorities", "Executives"]},
-      "subject/get": { "profileList": ["Authorities", "Executives", "Readers"]},
-      "subject/edit": { "profileList": ["Authorities", "Executives"]},
-      "subject/remove": { "profileList": ["Authorities", "Executives"]},
-      "subject/listByCriteria": { "profileList": ["Authorities", "Executives", "Readers"]},
-
-      "topic/create": { "profileList": ["Authorities", "Executives"]},
-      "topic/get": { "profileList": ["Authorities", "Executives", "Readers"]},
-      "topic/edit": { "profileList": ["Authorities", "Executives"]},
-      "topic/remove": { "profileList": ["Authorities", "Executives"]},
-      "topic/listByCriteria": { "profileList": ["Authorities", "Executives", "Readers"]},
-
-      "digitalContent/create": { "profileList": ["Authorities", "Executives"]},
-      "digitalContent/get": { "profileList": ["Authorities", "Executives", "Readers"]},
-      "digitalContent/edit": { "profileList": ["Authorities", "Executives"]},
-      "digitalContent/remove": { "profileList": ["Authorities", "Executives"]},
-      "digitalContent/listByCriteria": { "profileList": ["Authorities", "Executives", "Readers"]}
+      "subjectManInstance/init": {
+        "profileList": ["AwidLicenseOwner"]
+      },
+      "subjectManInstance/load": {
+        "profileList": ["Authorities","Executives","AwidLicenseOwner","Students","Teachers","HeadMasters"]
+      },
+      "subjectManInstance/edit": {
+        "profileList": ["Authorities","AwidLicenseOwner"]
+      },
+      "subjectManInstance/setState": {
+        "profileList": ["AwidLicenseOwner"]
+      },
+      "digitalContent/create": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives","Teachers","HeadMasters"]
+      }
     }
   }
 }
