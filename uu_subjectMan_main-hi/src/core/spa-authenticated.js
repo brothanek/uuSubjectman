@@ -16,6 +16,9 @@ import SubjectCreate from "../pages/subjects/subject_create/SubjectCreate";
 import TopicList from "../pages/topics/topic_list/TopicList";
 import TopicCreate from "../pages/topics/topic_create/TopicCreate";
 import Topic from "../pages/topics/topic_view/Topic";
+import Content from "../pages/content/content_view/Content";
+import ContentCreate from "../pages/content/content_create/ContentCreate";
+import ContentList from "../pages/content/content_list/ContentList";
 //@@viewOff:imports
 
 const STATICS = {
@@ -36,6 +39,9 @@ const ROUTES = {
   subject: { component: <Subject /> },
   topics: { component: <TopicList /> },
   topic: { component: <Topic /> },
+  content: { component: <Content /> },
+  content_list: { component: <ContentList /> },
+  content_create: { component: <ContentCreate /> },
   subject_create: { component: <SubjectCreate /> },
   topic_create: { component: <TopicCreate /> },
 

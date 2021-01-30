@@ -19,6 +19,12 @@ function Top() {
             content={useLsi(Lsi.top.topics)}
           />
         </UU5.BlockLayout.Column>
+        <UU5.BlockLayout.Column>
+          <UU5.Bricks.Button
+            onClick={() => UU5.Environment.getRouter().setRoute("content_list")}
+            content={useLsi(Lsi.top.contentList)}
+          />
+        </UU5.BlockLayout.Column>
         <UU5.BlockLayout.Column style={{ marginLeft: "300px" }}>
           <UU5.Bricks.Button
             onClick={() => UU5.Environment.getRouter().setRoute("about")}

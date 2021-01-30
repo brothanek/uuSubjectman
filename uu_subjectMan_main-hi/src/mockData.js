@@ -41,3 +41,20 @@ export const topicData = [
     contentIdList: ["1", "2"],
   },
 ];
+
+export const contentData = [
+  {
+    id: 1,
+    contentType: "document", // content type uuCourse,uuBook,video,other
+    contentName: "Introduction to Project Management",
+    link:
+      "https://plus4u.net/ues/sesm;jsessionid=F8D2672FA2092FCD8122B584B7CDEC36.0tcde38?REQID=7qGVyCTKqtk=&WINID=l01&action=r$b:2a@1-0&SessFree=sues%253A118500965363973101%253A50946989935530620", // link to digital content
+  },
+  {
+    id: 2,
+    contentType: "video", // content type uuCourse,uuBook,video,other
+    contentName: "Introduction to Python",
+    link:
+      "https://plus4u.net/ues/sesm;jsessionid=F8D2672FA2092FCD8122B584B7CDEC36.0tcde38?REQID=7qGVyCTKqtk=&WINID=l01&action=r$b:2a@1-0&SessFree=sues%253A118500965363973101%253A50946989935530620", // link to digital content
+  },
+];

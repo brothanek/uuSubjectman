@@ -51,6 +51,10 @@ const Lsi = {
       cs: "Témata",
       en: "Topics",
     },
+    contentList: {
+      cs: "Digitální obsah",
+      en: "Digital Content",
+    },
     about: {
       cs: "O aplikaci",
       en: "About",
