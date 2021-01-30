@@ -19,8 +19,16 @@ const subjectEditDtoInType = shape({
   name: string(100),
   credits: number(50),
   language: oneOf(["cz","en"]),
-  topicId: array(id(), 10),
+  topicIdList: array(id(), 10),
   description: string(16000),
   degree: oneOf(["ing","bc"]),
   state: oneOf(["draft","active"])
+});
+const subjectListDtoInType = shape({
+  sortBy: oneOf(["name"]),
+  order: oneOf(["asc", "desc"]),
+  pageInfo: shape({
+    pageIndex: integer(),
+    pageSize: integer(),
+  })
 });

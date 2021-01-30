@@ -18,6 +18,9 @@ const WARNINGS = {
   },
   editUnsupportedKeys: {
     code: `${Errors.Edit.UC_CODE}unsupportedKeys`,
+  },
+  listUnsupportedKeys: {
+    code: `${Errors.List.UC_CODE}unsupportedKeys`,
   }
 };
 
@@ -35,6 +38,40 @@ class SubjectAbl {
   constructor() {
     this.validator = Validator.load();
     this.dao = DaoFactory.getDao("subject");
+  }
+
+  async list(awid, dtoIn) {
+    await SubjectmanAbl.checkInstance(
+      awid,
+      Errors.List.SubjectmanInstanceDoesNotExist,
+      Errors.List.SubjectmanInstanceNotInProperState
+    );
+
+    // HDS 2
+    let validationResult = this.validator.validate("subjectListDtoInType", dtoIn);
+    // A1, A2
+    let uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      WARNINGS.listUnsupportedKeys.code,
+      Errors.List.InvalidDtoIn
+    );
+    //TODO create object in uuBT
+
+    // HDS 3
+    dtoIn.awid = awid;
+
+    if (!dtoIn.sortBy) dtoIn.sortBy = DEFAULTS.list.sortBy;
+    if (!dtoIn.order) dtoIn.order = DEFAULTS.list.order;
+    if (!dtoIn.pageInfo) dtoIn.pageInfo = {};
+    if (!dtoIn.pageInfo.pageSize) dtoIn.pageInfo.pageSize = DEFAULTS.list.pageSize;
+    if (!dtoIn.pageInfo.pageIndex) dtoIn.pageInfo.pageIndex = DEFAULTS.list.pageIndex;
+
+    let subject = await this.dao.list(dtoIn);
+
+    // HDS 4
+    subject.uuAppErrorMap = uuAppErrorMap;
+    return subject;
   }
 
   async edit(awid, dtoIn) {

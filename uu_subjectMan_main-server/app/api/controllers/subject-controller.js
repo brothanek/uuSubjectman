@@ -3,6 +3,10 @@ const SubjectAbl = require("../../abl/subject-abl.js");
 
 class SubjectController {
 
+  list(ucEnv) {
+    return SubjectAbl.list(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  }
+
   edit(ucEnv) {
     return SubjectAbl.edit(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
