@@ -80,7 +80,7 @@ class SubjectmanMainAbl {
 
       const createAwscDtoIn = {
         name: "UuSubjectman",
-        typeCode: "uu-subjectman-maing01",
+        typeCode: "uun-bpmi20wpt03-maing01",
         location: location,
         uuAppWorkspaceUri: baseUri,
       };
