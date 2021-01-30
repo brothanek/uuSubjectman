@@ -2,15 +2,27 @@
 // Manual changes to this file are discouraged, if values are inconsistent with package.json setting.
 import UU5 from "uu5g04";
 
-const TAG = "UuSubjectman.";
+const TAG = "UuSubjectMan.";
 
 export default {
   TAG,
   Css: UU5.Common.Css.createCssModule(
-    TAG.replace(/\.$/, "")
+    TAG.replace(/.$/, "")
       .toLowerCase()
-      .replace(/\./g, "-")
+      .replace(/./g, "-")
       .replace(/[^a-z-]/g, ""),
     process.env.NAME + "/" + process.env.OUTPUT_NAME + "@" + process.env.VERSION // this helps preserve proper order of styles among loaded libraries
   ),
+
+  PROFILES: {
+    HEADMASTER: "Headmaster",
+    TEACHERS: "Teachers",
+    STUDENTS: "Students",
+  },
+
+  STATES: {
+    ACTIVE: "active",
+    CLOSED: "closed",
+    UNDER_CONSTRUCTION: "underConstruction",
+  },
 };

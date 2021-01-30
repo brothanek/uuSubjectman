@@ -2,7 +2,7 @@
 import React from "react";
 import UU5 from "uu5g04";
 import "uu5g04-bricks";
-import { createVisualComponent, useState } from "uu5g04-hooks";
+import { createVisualComponent, useState, useDataObject } from "uu5g04-hooks";
 import Plus4U5 from "uu_plus4u5g01";
 import "uu_plus4u5g01-app";
 
@@ -65,6 +65,20 @@ export const SpaAuthenticated = createVisualComponent({
       return url.useCase || DEFAULT_USE_CASE;
     });
     const [edit, setEdit] = useState(false);
+
+    useDataObject({
+      handlerMap: {
+        load: (data) => {
+          return Calls.loadApp(data)
+            .then((data) => {
+              // setup authorization service in Environment to access it across the application
+              UU5.Environment.App.authorization = new Authorization(data.authorizedProfileList);
+              return data;
+            })
+            .catch((error) => console.error(error.toString()));
+        },
+      },
+    });
 
     //@@viewOff:private
 

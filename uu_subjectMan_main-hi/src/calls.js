@@ -14,8 +14,12 @@ let Calls = {
   },
   // topics
 
+  loadApp(dtoInData) {
+    let commandUri = Calls.getCommandUri("subjectman/load");
+    return Calls.call("get", commandUri, dtoInData);
+  },
   updateTopic(dtoIn) {
-    let commandUri = Calls.getCommandUri("topic/update");
+    let commandUri = Calls.getCommandUri("topic/edit");
     return Calls.call("get", commandUri, dtoIn);
   },
 
@@ -27,7 +31,7 @@ let Calls = {
   // subjects
 
   updateSubject(dtoIn) {
-    let commandUri = Calls.getCommandUri("subject/update");
+    let commandUri = Calls.getCommandUri("subject/edit");
     return Calls.call("get", commandUri, dtoIn);
   },
 
@@ -39,7 +43,7 @@ let Calls = {
   // contents
 
   updateContent(dtoIn) {
-    let commandUri = Calls.getCommandUri("content/update");
+    let commandUri = Calls.getCommandUri("content/edit");
     return Calls.call("get", commandUri, dtoIn);
   },
 
