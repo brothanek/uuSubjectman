@@ -85,6 +85,11 @@
         "realization": "api/controllers/SubjectController.remove",
         "httpMethod": "POST",
         "type": "CMD"
+      },
+      "subject/edit": {
+        "realization": "api/controllers/SubjectController.edit",
+        "httpMethod": "POST",
+        "type": "CMD"
       }
     }
   }

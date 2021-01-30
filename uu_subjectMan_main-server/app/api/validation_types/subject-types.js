@@ -14,3 +14,13 @@ const subjectGetDtoInType = shape({
 const subjectRemoveDtoInType = shape({
   id: id().isRequired(),
 });
+const subjectEditDtoInType = shape({
+  id: id().isRequired(),
+  name: string(100),
+  credits: number(50),
+  language: oneOf(["cz","en"]),
+  topicId: array(id(), 10),
+  description: string(16000),
+  degree: oneOf(["ing","bc"]),
+  state: oneOf(["draft","active"])
+});
