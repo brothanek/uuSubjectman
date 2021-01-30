@@ -9,6 +9,9 @@ const SubjectmanAbl =  require("./subjectman-main-abl");
 const WARNINGS = {
   createUnsupportedKeys: {
     code: `${Errors.Create.UC_CODE}unsupportedKeys`,
+  },
+  getUnsupportedKeys: {
+    code: `${Errors.Get.UC_CODE}unsupportedKeys`,
   }
 };
 
@@ -17,6 +20,38 @@ class TopicAbl {
   constructor() {
     this.validator = Validator.load();
     this.dao = DaoFactory.getDao("topic");
+  }
+
+  async get(awid, dtoIn) {
+    await SubjectmanAbl.checkInstance(
+      awid,
+      Errors.Get.SubjectmanInstanceDoesNotExist,
+      Errors.Get.SubjectmanInstanceNotInProperState
+    );
+
+    // HDS 2
+    let validationResult = this.validator.validate("topicGetDtoInType", dtoIn);
+    // A1, A2
+    let uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      WARNINGS.getUnsupportedKeys.code,
+      Errors.Get.InvalidDtoIn
+    );
+    //TODO create object in uuBT
+
+    // HDS 3
+    dtoIn.awid = awid;
+
+    let topic = await this.dao.get(dtoIn);
+    if (!topic) {
+      // A6
+      throw new Errors.Get.TopicDaoGetFailed(uuAppErrorMap, { topicId: dtoIn.id });
+    }
+
+    // HDS 4
+    topic.uuAppErrorMap = uuAppErrorMap;
+    return topic;
   }
 
   async create(awid, dtoIn) {
