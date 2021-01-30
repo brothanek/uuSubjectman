@@ -26,7 +26,10 @@ const Editable = ({
       props: {
         ...props,
         onChange: ({ value, _data: { type } }) => {
-          if (type === "changeValue") setValues({ ...values, [valueType]: [...values[valueType], value] });
+          if (type === "changeValue") {
+            const changedVal = multiple ? [...values[valueType], value] : [value];
+            setValues({ ...values, [valueType]: changedVal });
+          }
           if (type === "remove")
             setValues({ ...values, [valueType]: [...values[valueType].filter((el) => el !== value)] });
           return;
