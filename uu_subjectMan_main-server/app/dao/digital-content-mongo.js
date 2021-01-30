@@ -20,8 +20,7 @@ class digitalContentMongo extends UuObjectDao {
   }
 
   async get(uuObject) {
-    let filter = { awid: uuObject.awid, id: uuObject.id };
-    return await super.findOne(filter);
+    return await super.findOne(uuObject);
   }
 
   async list(uuObject) {

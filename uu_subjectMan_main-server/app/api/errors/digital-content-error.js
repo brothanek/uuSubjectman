@@ -3,6 +3,38 @@
 const SubjectmanMainUseCaseError = require("./subjectman-main-use-case-error.js");
 const DIGITAL_CONTENT_ERROR_PREFIX = `${SubjectmanMainUseCaseError.ERROR_PREFIX}digitalContent/`;
 
+const Get = {
+  UC_CODE: `${DIGITAL_CONTENT_ERROR_PREFIX}get/`,
+  InvalidDtoIn: class extends SubjectmanMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}invalidDtoIn`;
+      this.message = "DtoIn is not valid.";
+    }
+  },
+  SubjectmanInstanceDoesNotExist: class extends SubjectmanMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}subjectTermManInstanceDoesNotExist`;
+      this.message = "SubjectTermManInstance does not exist.";
+    }
+  },
+  SubjectmanInstanceNotInProperState: class extends SubjectmanMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}subjectTermManInstanceNotInProperState`;
+      this.message = "SubjectTermManInstance is not in proper state [active|underConstruction].";
+    }
+  },
+  DigitalContentDaoGetFailed: class extends SubjectmanMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}digitalContentDaoGetFailed`;
+      this.message = "Get digitalContent by digitalContent DAO get failed.";
+    }
+  },
+};
+
 const Create = {
   UC_CODE: `${DIGITAL_CONTENT_ERROR_PREFIX}create/`,
 
@@ -46,5 +78,6 @@ const Create = {
 };
 
 module.exports = {
+  Get,
   Create
 };

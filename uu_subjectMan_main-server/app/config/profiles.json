@@ -32,6 +32,10 @@
       "digitalContent/create": {
         "sysStateList": ["active"],
         "profileList": ["Authorities","Executives","Teachers","HeadMasters"]
+      },
+      "digitalContent/get": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives","Teachers","HeadMasters","Students"]
       }
     }
   }
