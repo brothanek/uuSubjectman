@@ -1,25 +1,23 @@
 import React from "react";
 import UU5 from "uu5g04";
 
-function ContentCreate() {
-  const handleSubmit = (values) => {
-    UU5.Environment.getPage().getAlertBus().addAlert({
-      content: `Creation succeeded!`,
-      colorSchema: "green",
-    });
-    UU5.Environment.getRouter().setRoute("home");
-  };
-
-  const handleCancel = () => {
-    window.history.back();
-  };
-
+function ContentCreate({ onSave, modal }) {
   return (
     <div>
       <UU5.Forms.Form
         header={<UU5.Bricks.Box content="Create new digital content" colorSchema="green" className="font-size-m" />}
-        onSave={({ component, values }) => handleSubmit(component, values)}
-        onCancel={handleCancel}
+        onSave={onSave}
+        onSaveDone={() => {
+          modal.close();
+        }}
+        onSaveFail={(opt) => {
+          opt.component.getAlertBus().setAlert({
+            content: "Creating on server failed",
+            colorSchema: "danger",
+          });
+        }}
+        onCancel={() => modal.close()}
+        controlled={false}
       >
         <UU5.Forms.Text
           pattern="[A-Za-z]{5}"

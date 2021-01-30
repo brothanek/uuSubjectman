@@ -14,7 +14,6 @@ function Topic({ params }) {
     pageSize: 50,
     handlerMap: {
       load: Calls.listContents,
-      createItem: Calls.createSubject,
     },
     itemHandlerMap: {
       delete: Calls.deleteSubject,
@@ -36,7 +35,10 @@ function Topic({ params }) {
       setEdit(false);
       setValues(result);
     } catch (e) {
-      console.warn(e);
+      UU5.Environment.getPage().getAlertBus().addAlert({
+        content: e,
+        colorSchema: "red",
+      });
     }
   };
   const data = (dataListResult?.data || []).map(({ data }) => data);

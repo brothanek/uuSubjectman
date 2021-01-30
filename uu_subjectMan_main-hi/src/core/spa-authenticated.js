@@ -5,6 +5,7 @@ import "uu5g04-bricks";
 import { createVisualComponent, useState, useDataObject } from "uu5g04-hooks";
 import Plus4U5 from "uu_plus4u5g01";
 import "uu_plus4u5g01-app";
+import Calls from "calls";
 
 import Config from "./config/config";
 import Top from "./top";
@@ -19,6 +20,7 @@ import Topic from "../pages/topics/topic_view/Topic";
 import Content from "../pages/content/content_view/Content";
 import ContentCreate from "../pages/content/content_create/ContentCreate";
 import ContentList from "../pages/content/content_list/ContentList";
+import authorization from "../helpers/authorization";
 //@@viewOff:imports
 
 const STATICS = {
@@ -72,7 +74,7 @@ export const SpaAuthenticated = createVisualComponent({
           return Calls.loadApp(data)
             .then((data) => {
               // setup authorization service in Environment to access it across the application
-              UU5.Environment.App.authorization = new Authorization(data.authorizedProfileList);
+              UU5.Environment.App.authorization = new authorization(data.authorizedProfileList);
               return data;
             })
             .catch((error) => console.error(error.toString()));

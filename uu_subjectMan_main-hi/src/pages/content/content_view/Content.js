@@ -25,7 +25,10 @@ function Content({ params }) {
         colorSchema: "green",
       });
     } catch (e) {
-      console.warn(e);
+      UU5.Environment.getPage().getAlertBus().addAlert({
+        content: e,
+        colorSchema: "red",
+      });
     }
   };
 

@@ -5,25 +5,23 @@ const data = [
   { id: "1", topicName: "Video 1" },
   { id: "2", topicName: "Text 1" },
 ];
-function TopicCreate() {
-  const handleSubmit = (values) => {
-    UU5.Environment.getPage().getAlertBus().addAlert({
-      content: `Creation succeeded!`,
-      colorSchema: "green",
-    });
-    UU5.Environment.getRouter().setRoute("topics");
-  };
-
-  const handleCancel = () => {
-    window.history.back();
-  };
-
+function TopicCreate({ onSave, modal }) {
   return (
     <div>
       <UU5.Forms.Form
         header={<UU5.Bricks.Box content="Create new topic" colorSchema="green" className="font-size-m" />}
-        onSave={({ component, values }) => handleSubmit(component, values)}
-        onCancel={handleCancel}
+        onSave={onSave}
+        onSaveDone={() => {
+          modal.close();
+        }}
+        onSaveFail={(opt) => {
+          opt.component.getAlertBus().setAlert({
+            content: "Creating on server failed",
+            colorSchema: "danger",
+          });
+        }}
+        onCancel={() => modal.close()}
+        controlled={false}
       >
         <UU5.Forms.Text
           pattern="[A-Za-z]{5}"
