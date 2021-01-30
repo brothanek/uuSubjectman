@@ -1,0 +1,24 @@
+{
+  "itemList": [
+    {
+      "id": 1,
+      "subjectName": "Software development",
+      "credits": 5,
+      "degree": "bc",
+      "languages": ["CZ"],
+      "description": "brief subject's overview",
+      "topicIdList": ["1"],
+      "state": "active"
+    },
+    {
+      "id": 2,
+      "subjectName": "Mathematics",
+      "credits": 8,
+      "degree": "bc",
+      "languages": ["CZ", "EN"],
+      "description": "brief subject's overview",
+      "topicIdList": ["2"],
+      "state": "active"
+    }
+  ]
+}

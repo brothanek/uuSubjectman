@@ -1,7 +1,7 @@
 {
   "name": "uu_subjectMan_main-server",
-  "version": "0.1.0",
-  "description": "",
+  "version": "0.1.0-DEV",
+  "description": "Application for school subject management",
   "license": "License Commercial",
   "spec": "nodejs-app; uu_appg01@3.1.0",
   "dependencies": {

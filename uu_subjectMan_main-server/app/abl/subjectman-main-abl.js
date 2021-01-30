@@ -12,18 +12,34 @@ const WARNINGS = {
   initUnsupportedKeys: {
     code: `${Errors.Init.UC_CODE}unsupportedKeys`,
   },
+
 };
 
-const logger = LoggerFactory.get("SubjectManMainAbl");
+const STATE_ACTIVE = "active";
+const STATE_UNDER_CONSTRUCTION = "underConstruction";
+const STATE_CLOSED = "closed";
+const AUTHORITIES = "Authorities";
+const EXECUTIVES = "Executives";
 
-class SubjectManMainAbl {
+
+const logger = LoggerFactory.get("SubjectmanMainAbl");
+
+class SubjectmanMainAbl {
   constructor() {
     this.validator = Validator.load();
+    this.dao = DaoFactory.getDao("subjectman");
   }
 
   async init(uri, dtoIn, session) {
     const awid = uri.getAwid();
     // HDS 1
+    let subjectManInstance = await this.dao.getByAwid(awid);
+
+    // A1
+    if (subjectManInstance) {
+      throw new Errors.Init.SubjectmanInstanceAlreadyInitialized();
+    }
+
     let validationResult = this.validator.validate("initDtoInType", dtoIn);
     // A1, A2
     let uuAppErrorMap = ValidationHelper.processValidationResult(
@@ -33,8 +49,7 @@ class SubjectManMainAbl {
       Errors.Init.InvalidDtoIn
     );
 
-    // HDS 2
-    const schemas = ["subjectManMain"];
+    const schemas = ["subjectman"];
     let schemaCreateResults = schemas.map(async (schema) => {
       try {
         return await DaoFactory.getDao(schema).createSchema();
@@ -45,6 +60,18 @@ class SubjectManMainAbl {
     });
     await Promise.all(schemaCreateResults);
 
+    dtoIn.awid = awid;
+
+    try {
+      subjectManInstance = await this.dao.create(dtoIn);
+    } catch (e) {
+      // A4
+      if (e instanceof ObjectStoreError) {
+        throw new Errors.Init.SubjectmanInstanceDaoCreateFailed({ uuAppErrorMap }, e);
+      }
+      throw e;
+    }
+
     if (dtoIn.uuBtLocationUri) {
       const baseUri = uri.getBaseUri();
       const uuBtUriBuilder = UriBuilder.parse(dtoIn.uuBtLocationUri);
@@ -52,8 +79,8 @@ class SubjectManMainAbl {
       const uuBtBaseUri = uuBtUriBuilder.toUri().getBaseUri();
 
       const createAwscDtoIn = {
-        name: "UuSubjectMan",
-        typeCode: "uu-subjectMan-main",
+        name: "UuSubjectman",
+        typeCode: "uun-bpmi20wpt03-maing01",
         location: location,
         uuAppWorkspaceUri: baseUri,
       };
@@ -95,7 +122,7 @@ class SubjectManMainAbl {
       } catch (e) {
         if (e instanceof UuAppWorkspaceError) {
           // A4
-          throw new Errors.Init.SysSetProfileFailed({ uuAppErrorMap }, { role: dtoIn.uuAppProfileAuthorities }, e);
+          throw new Errors.Init.SetProfileFailed({ uuAppErrorMap }, { role: dtoIn.uuAppProfileAuthorities }, e);
         }
         throw e;
       }
@@ -112,6 +139,56 @@ class SubjectManMainAbl {
       uuAppErrorMap: uuAppErrorMap,
     };
   }
+
+  async load(awid, authorizationResult, session) {
+    // hds 1, A1, hds 1.1, A2
+    let subjectmanInstance = await this.checkInstance(
+      awid,
+      Errors.Load.SubjectmanDoesNotExist,
+      Errors.Load.SubjectmanNotInProperState
+    );
+
+    // A3
+    let authorizedProfiles = authorizationResult.getIdentityProfiles();
+    if (
+      subjectmanInstance.state === STATE_UNDER_CONSTRUCTION &&
+      !authorizedProfiles.includes(AUTHORITIES) &&
+      !authorizedProfiles.includes(EXECUTIVES)
+    ) {
+      throw new Errors.Load.SubjectmanIsUnderConstruction({}, { state: subjectmanInstance.state });
+    }
+
+    // hds 3
+    subjectmanInstance.authorizedProfileList = authorizedProfiles;
+
+    // HDS 4
+    return subjectmanInstance;
+  }
+
+  /**
+   * Checks whether subjectman instance exists and that it is not in closed state.
+   * @param {String} awid Used awid
+   * @param {Error} notExistError Error thrown when subjectman instance does not exist
+   * @param {Error} closedStateError Error thrown when subjectman instance is in closed state
+   * @returns {Promise<{}>} subjectman instance
+   */
+  async checkInstance(awid, notExistError, closedStateError) {
+    let subjectmanInstance = await this.dao.getByAwid(awid);
+    if (!subjectmanInstance) {
+      throw new notExistError();
+    }
+    if (subjectmanInstance.state === STATE_CLOSED) {
+      throw new closedStateError(
+        {},
+        {
+          state: subjectmanInstance.state,
+          expectedStateList: [STATE_ACTIVE, STATE_UNDER_CONSTRUCTION],
+        }
+      );
+    }
+    return subjectmanInstance;
+  }
+
 }
 
-module.exports = new SubjectManMainAbl();
+module.exports = new SubjectmanMainAbl();

@@ -12,6 +12,65 @@ let Calls = {
     let response = await Plus4U5.Common.Calls.call(method, url, dtoIn, clientOptions);
     return response.data;
   },
+  // topics
+
+  loadApp(dtoInData) {
+    let commandUri = Calls.getCommandUri("subjectManInstance/load");
+    return Calls.call("get", commandUri, dtoInData);
+  },
+  updateTopic(dtoIn) {
+    let commandUri = Calls.getCommandUri("topic/edit");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  listTopics(dtoIn) {
+    let commandUri = Calls.getCommandUri("topic/list");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+  listTopics(dtoIn) {
+    let commandUri = Calls.getCommandUri("topic/list");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+  createTopic(dtoIn) {
+    let commandUri = Calls.getCommandUri("topic/create");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  // subjects
+
+  updateSubject(dtoIn) {
+    let commandUri = Calls.getCommandUri("subject/edit");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  listSubjects(dtoIn) {
+    let commandUri = Calls.getCommandUri("subject/list");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+  createSubject(dtoIn) {
+    let commandUri = Calls.getCommandUri("subject/create");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  // contents
+
+  updateContent(dtoIn) {
+    let commandUri = Calls.getCommandUri("digitalContent/edit");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  listContents(dtoIn) {
+    let commandUri = Calls.getCommandUri("digitalContent/list");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+  createContent(dtoIn) {
+    let commandUri = Calls.getCommandUri("digitalContent/create");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+  deleteContent(dtoIn) {
+    let commandUri = Calls.getCommandUri("digitalContent/remove");
+    return Calls.call("post", commandUri, dtoIn);
+  },
 
   loadDemoContent(dtoIn) {
     let commandUri = Calls.getCommandUri("loadDemoContent");

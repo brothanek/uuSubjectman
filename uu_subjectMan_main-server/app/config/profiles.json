@@ -1,11 +1,10 @@
 {
   "{asid}": {
-    "profileList": ["AsidAuthorities", "AsidExecutives", "AsidLicenseOwner", "Public"],
-    "useCaseMap": {
-    }
+    "profileList": ["AsidAuthorities","AsidLicenseOwner"],
+    "useCaseMap": {}
   },
   "*": {
-    "profileList": ["Authorities", "Executives", "AwidLicenseOwner", "Public"],
+    "profileList": ["Authorities","Executives","AwidLicenseOwner","Students","Teachers","HeadMasters","Public"],
     "useCaseMap": {
       "sys/uuAppWorkspace/init": {
         "sysStateList": ["created"],
@@ -16,7 +15,79 @@
       },
       "sys/uuAppWorkspace/initUve": {
         "sysStateList": ["created"],
-        "profileList": ["Public", "AwidLicenseOwner"]
+        "profileList": ["Public","AwidLicenseOwner"]
+      },
+      "subjectManInstance/init": {
+        "profileList": ["AwidLicenseOwner"]
+      },
+      "subjectManInstance/load": {
+        "profileList": ["Authorities","Executives","AwidLicenseOwner","Students","Teachers","HeadMasters"]
+      },
+      "subjectManInstance/edit": {
+        "profileList": ["Authorities","AwidLicenseOwner"]
+      },
+      "subjectManInstance/setState": {
+        "profileList": ["AwidLicenseOwner"]
+      },
+      "digitalContent/create": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives","Teachers","HeadMasters"]
+      },
+      "digitalContent/get": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives","Teachers","HeadMasters","Students"]
+      },
+      "digitalContent/edit": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives","Teachers","HeadMasters"]
+      },
+      "digitalContent/remove": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives","Teachers","HeadMasters"]
+      },
+      "digitalContent/list": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives","Teachers","HeadMasters","Students"]
+      },
+      "topic/create": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives","Teachers","HeadMasters"]
+      },
+      "topic/get": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives","Teachers","HeadMasters","Students"]
+      },
+      "topic/edit": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives","Teachers","HeadMasters"]
+      },
+      "topic/remove": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives","Teachers","HeadMasters"]
+      },
+      "topic/list": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives","Teachers","HeadMasters","Students"]
+      },
+      "subject/create": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives","Teachers","HeadMasters"]
+      },
+      "subject/get": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives","Teachers","HeadMasters","Students"]
+      },
+      "subject/remove": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives","Teachers","HeadMasters"]
+      },
+      "subject/edit": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives","Teachers","HeadMasters"]
+      },
+      "subject/list": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives","Teachers","HeadMasters","Students"]
       }
     }
   }

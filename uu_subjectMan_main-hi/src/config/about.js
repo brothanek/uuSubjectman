@@ -34,34 +34,20 @@ export const About = {
   },
   leadingAuthors: [
     {
-      name: "Some Name",
-      uuIdentity: "4-4-1",
-      role: {
-        en: "Chief Business Architect & Stakeholder",
-      },
+      name: "Ondřej Brothánek",
+      uuIdentity: "25-1631-1",
     },
     {
-      name: "Other Name",
-      uuIdentity: "4-4-1",
-      role: {
-        en: "Head of Development",
-      },
-    },
-  ],
-  otherAuthors: [
-    {
-      name: "Your Name",
-      uuIdentity: "4-4-1",
-      role: {
-        en: "Developer",
-      },
+      name: "Tomáš Bosák",
+      uuIdentity: "25-2555-1",
     },
     {
-      name: "More Names",
-      uuIdentity: "4-4-1",
-      role: {
-        en: "Developer",
-      },
+      name: "Jiří Čermák",
+      uuIdentity: "24-9582-1",
+    },
+    {
+      name: "Radek Svoboda",
+      uuIdentity: "25-221-1",
     },
   ],
   usedTechnologies: {

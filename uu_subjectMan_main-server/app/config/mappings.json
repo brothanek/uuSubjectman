@@ -2,8 +2,13 @@
   "{vendor}-{uuApp}-{uuSubApp}": {
     "useCaseMap": {
       "sys/uuAppWorkspace/init": {
-        "realization": "api/controllers/SubjectManMainController.init",
+        "realization": "api/controllers/SubjectmanMainController.init",
         "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "subjectManInstance/load": {
+        "realization": "api/controllers/SubjectmanMainController.load",
+        "httpMethod": "GET",
         "type": "CMD"
       },
       "defaultUve": {
@@ -15,6 +20,81 @@
         "realization": "index.html",
         "httpMethod": "GET",
         "type": "UVE"
+      },
+      "digitalContent/create": {
+        "realization": "api/controllers/DigitalContentController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "digitalContent/get": {
+        "realization": "api/controllers/DigitalContentController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "digitalContent/edit": {
+        "realization": "api/controllers/DigitalContentController.edit",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "digitalContent/remove": {
+        "realization": "api/controllers/DigitalContentController.remove",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "digitalContent/list": {
+        "realization": "api/controllers/DigitalContentController.list",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "topic/create": {
+        "realization": "api/controllers/TopicController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "topic/get": {
+        "realization": "api/controllers/TopicController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "topic/edit": {
+        "realization": "api/controllers/TopicController.edit",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "topic/remove": {
+        "realization": "api/controllers/TopicController.remove",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "topic/list": {
+        "realization": "api/controllers/TopicController.list",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "subject/create": {
+        "realization": "api/controllers/SubjectController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "subject/get": {
+        "realization": "api/controllers/SubjectController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "subject/remove": {
+        "realization": "api/controllers/SubjectController.remove",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "subject/edit": {
+        "realization": "api/controllers/SubjectController.edit",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "subject/list": {
+        "realization": "api/controllers/SubjectController.list",
+        "httpMethod": "GET",
+        "type": "CMD"
       }
     }
   }

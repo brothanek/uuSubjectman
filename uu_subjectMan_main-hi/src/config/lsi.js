@@ -1,9 +1,37 @@
 const Lsi = {
   appName: {
-    cs: "Aplikace uuSubjectMan",
-    en: "Application uuSubjectMan",
+    cs: "Aplikace uuSubjectman",
+    en: "Application uuSubjectman",
   },
-
+  common: {
+    edit: {
+      cs: "Upravit",
+      en: "Edit",
+    },
+    cancel: {
+      cs: "Zrušit",
+      en: "Cancel",
+    },
+    submit: {
+      cs: "Potvrdit",
+      en: "Submit",
+    },
+    name: { cs: "Název", en: "Name" },
+  },
+  topic: {
+    topicList: {
+      header: { cs: "Seznam témat", en: "Topic list" },
+    },
+    edit: {
+      cs: "Upravit",
+      en: "Edit",
+    },
+  },
+  subject: {
+    subjectList: {
+      header: { cs: "Seznam předmětů", en: "Subject list" },
+    },
+  },
   left: {
     home: {
       cs: "Vítejte",
@@ -14,11 +42,29 @@ const Lsi = {
       en: "About Application",
     },
   },
+  top: {
+    home: {
+      cs: "Předměty",
+      en: "Subjects",
+    },
+    topics: {
+      cs: "Témata",
+      en: "Topics",
+    },
+    contentList: {
+      cs: "Digitální obsah",
+      en: "Digital Content",
+    },
+    about: {
+      cs: "O aplikaci",
+      en: "About",
+    },
+  },
 
   about: {
     header: {
-      cs: "O aplikaci uuSubjectMan",
-      en: "About application uuSubjectMan",
+      cs: "O aplikaci uuSubjectman",
+      en: "About application uuSubjectman",
     },
     creatorsHeader: {
       cs: "Tvůrci aplikace",
@@ -119,12 +165,12 @@ const Lsi = {
 
   unauthInit: {
     buyYourOwn: {
-      cs: "Můžete si koupit vlastní uuSubjectMan.",
-      en: "You can buy your own uuSubjectMan.",
+      cs: "Můžete si koupit vlastní uuSubjectman.",
+      en: "You can buy your own uuSubjectman.",
     },
     notAuthorized: {
-      cs: "Nemáte právo inicializovat tuto aplikaci uuSubjectMan.",
-      en: "You don't have rights to initialize this uuSubjectMan.",
+      cs: "Nemáte právo inicializovat tuto aplikaci uuSubjectman.",
+      en: "You don't have rights to initialize this uuSubjectman.",
     },
   },
 
