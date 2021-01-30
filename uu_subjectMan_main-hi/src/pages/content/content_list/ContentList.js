@@ -24,7 +24,7 @@ function ContentList() {
 
         <UU5.Bricks.Table.TBody>
           {contentData.map((col) => {
-            const { contentName, contentType, link } = col;
+            const { contentName = "", contentType = "", link = "" } = col;
             return (
               <UU5.Bricks.Table.Tr>
                 <UU5.Bricks.Table.Td
@@ -36,7 +36,10 @@ function ContentList() {
                   }
                 />
                 <UU5.Bricks.Table.Td content={contentType} />
-                <UU5.Bricks.Table.Td content={link} />
+                <UU5.Bricks.Table.Td
+                  style={{ maxWidth: "200px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
+                  content={<a href={link}>{link} </a>}
+                />
               </UU5.Bricks.Table.Tr>
             );
           })}

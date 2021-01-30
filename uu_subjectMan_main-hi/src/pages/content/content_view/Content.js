@@ -68,45 +68,13 @@ function Content({ params }) {
                 inputType="input"
                 type="url"
                 style={{
-                  width: "250px",
+                  width: "550px",
                 }}
               >
-                {link || ""}
+                <a href={link}>{link || ""}</a>
               </Editable>
             </UU5.Bricks.Section>
           </UU5.Bricks.Column>
-          {/* <UU5.Bricks.Column width="25%">
-            <UU5.Bricks.Section header="Languages">
-              <Editable
-                {...propsForEditable}
-                inputType="select"
-                multiple
-                options={["EN", "CZ"]}
-                valueType="languages"
-                style={{
-                  width: "150px",
-                }}
-              >
-                {(languages || []).join(",")}
-              </Editable>
-            </UU5.Bricks.Section>
-          </UU5.Bricks.Column>
-          <UU5.Bricks.Column width="25%">
-            <UU5.Bricks.Section header="Topics">
-              <Editable
-                {...propsForEditable}
-                inputType="select"
-                multiple
-                options={["1", "2", "..."]} // TODO - get all topics from database
-                valueType="topicIdList"
-                style={{
-                  width: "150px",
-                }}
-              >
-                {(topicIdList || []).join(",")}
-              </Editable>
-            </UU5.Bricks.Section>
-          </UU5.Bricks.Column> */}
         </UU5.Bricks.Row>
 
         <UU5.Bricks.Button
