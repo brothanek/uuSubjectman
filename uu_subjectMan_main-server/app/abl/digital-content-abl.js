@@ -3,7 +3,7 @@ const Path = require("path");
 const { Validator } = require("uu_appg01_server").Validation;
 const { DaoFactory, ObjectStoreError } = require("uu_appg01_server").ObjectStore;
 const { ValidationHelper } = require("uu_appg01_server").AppServer;
-const Errors = require("../api/errors/subject-error.js");
+const Errors = require("../api/errors/digital-content-error.js");
 const SubjectmanAbl =  require("./subjectman-main-abl");
 
 const WARNINGS = {
@@ -13,10 +13,10 @@ const WARNINGS = {
   getUnsupportedKeys: {
     code: `${Errors.Get.UC_CODE}unsupportedKeys`,
   },
-  removeUnsupportedKeys: {
-    code: `${Errors.Remove.UC_CODE}unsupportedKeys`,
-  },
   editUnsupportedKeys: {
+    code: `${Errors.Edit.UC_CODE}unsupportedKeys`,
+  },
+  removeUnsupportedKeys: {
     code: `${Errors.Edit.UC_CODE}unsupportedKeys`,
   },
   listUnsupportedKeys: {
@@ -26,18 +26,18 @@ const WARNINGS = {
 
 const DEFAULTS = {
   list: {
-    sortBy: "topicName",
+    sortBy: "contentName",
     order: "asc",
     pageIndex: 0,
     pageSize: 100,
   }
 };
 
-class SubjectAbl {
+class DigitalContentAbl {
 
   constructor() {
     this.validator = Validator.load();
-    this.dao = DaoFactory.getDao("subject");
+    this.dao = DaoFactory.getDao("digitalContent");
   }
 
   async list(awid, dtoIn) {
@@ -48,7 +48,7 @@ class SubjectAbl {
     );
 
     // HDS 2
-    let validationResult = this.validator.validate("subjectListDtoInType", dtoIn);
+    let validationResult = this.validator.validate("digitalContentListDtoInType", dtoIn);
     // A1, A2
     let uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
@@ -67,50 +67,11 @@ class SubjectAbl {
     if (!dtoIn.pageInfo.pageSize) dtoIn.pageInfo.pageSize = DEFAULTS.list.pageSize;
     if (!dtoIn.pageInfo.pageIndex) dtoIn.pageInfo.pageIndex = DEFAULTS.list.pageIndex;
 
-    let subject = await this.dao.list(dtoIn);
+    let digitalContent = await this.dao.list(dtoIn);
 
     // HDS 4
-    subject.uuAppErrorMap = uuAppErrorMap;
-    return subject;
-  }
-
-  async edit(awid, dtoIn) {
-    await SubjectmanAbl.checkInstance(
-      awid,
-      Errors.Edit.SubjectmanInstanceDoesNotExist,
-      Errors.Edit.SubjectmanInstanceNotInProperState
-    );
-
-    // HDS 2
-    let validationResult = this.validator.validate("subjectEditDtoInType", dtoIn);
-    // A1, A2
-    let uuAppErrorMap = ValidationHelper.processValidationResult(
-      dtoIn,
-      validationResult,
-      WARNINGS.editUnsupportedKeys.code,
-      Errors.Edit.InvalidDtoIn
-    );
-    //TODO update object in uuBT
-
-    let subjectExist = await this.dao.get({id: dtoIn.id, awid: awid});
-    if  (!subjectExist) throw new Errors.Edit.SubjectDoesNotExist({ uuAppErrorMap }, {id: dtoIn.id} )
-
-    let subject;
-    dtoIn.awid = awid;
-
-    try {
-      subject = await this.dao.update(dtoIn);
-    } catch (e) {
-      // A8
-      if (e instanceof ObjectStoreError) {
-        throw new Errors.Edit.TopicDaoUpdateFailed({ uuAppErrorMap }, e);
-      }
-      throw e;
-    }
-
-    // HDS 8
-    subject.uuAppErrorMap = uuAppErrorMap;
-    return subject;
+    digitalContent.uuAppErrorMap = uuAppErrorMap;
+    return digitalContent;
   }
 
   async remove(awid, dtoIn) {
@@ -121,7 +82,7 @@ class SubjectAbl {
     );
 
     // HDS 2
-    let validationResult = this.validator.validate("subjectRemoveDtoInType", dtoIn);
+    let validationResult = this.validator.validate("digitalContentRemoveDtoInType", dtoIn);
     // A1, A2
     let uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
@@ -131,24 +92,63 @@ class SubjectAbl {
     );
     //TODO update object in uuBT
 
-    let subjectExist = await this.dao.get({id: dtoIn.id, awid: awid});
-    if  (!subjectExist) throw new Errors.Remove.SubjectDoesNotExist({ uuAppErrorMap }, {id: dtoIn.id} )
+    let digitalContentExist = await this.dao.get({id: dtoIn.id, awid: awid});
+    if  (!digitalContentExist) throw new Errors.Remove.DigitalContentDoesNotExist({ uuAppErrorMap }, {id: dtoIn.id} )
 
-    let topic;
+    let digitalContent;
     dtoIn.awid = awid;
 
     try {
-      topic = await this.dao.delete(dtoIn);
+      digitalContent = await this.dao.delete(dtoIn);
     } catch (e) {
       // A8
       if (e instanceof ObjectStoreError) {
-        throw new Errors.Remove.TopicDaoDeleteFailed({ uuAppErrorMap }, e);
+        throw new Errors.Remove.digitalContentDaoDeleteFailed({ uuAppErrorMap }, e);
       }
       throw e;
     }
 
     // HDS
     return { uuAppErrorMap };
+  }
+
+  async edit(awid, dtoIn) {
+    await SubjectmanAbl.checkInstance(
+      awid,
+      Errors.Edit.SubjectmanInstanceDoesNotExist,
+      Errors.Edit.SubjectmanInstanceNotInProperState
+    );
+
+    // HDS 2
+    let validationResult = this.validator.validate("digitalContentEditDtoInType", dtoIn);
+    // A1, A2
+    let uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      WARNINGS.editUnsupportedKeys.code,
+      Errors.Edit.InvalidDtoIn
+    );
+    //TODO update object in uuBT
+
+    let digitalContentExist = await this.dao.get({id: dtoIn.id, awid: awid});
+    if  (!digitalContentExist) throw new Errors.Edit.DigitalContentDoesNotExist({ uuAppErrorMap }, {id: dtoIn.id} )
+
+    let digitalContent;
+    dtoIn.awid = awid;
+
+    try {
+      digitalContent = await this.dao.update(dtoIn);
+    } catch (e) {
+      // A8
+      if (e instanceof ObjectStoreError) {
+        throw new Errors.Edit.DigitalContentDaoUpdateFailed({ uuAppErrorMap }, e);
+      }
+      throw e;
+    }
+
+    // HDS 8
+    digitalContent.uuAppErrorMap = uuAppErrorMap;
+    return digitalContent;
   }
 
   async get(awid, dtoIn) {
@@ -159,7 +159,7 @@ class SubjectAbl {
     );
 
     // HDS 2
-    let validationResult = this.validator.validate("subjectGetDtoInType", dtoIn);
+    let validationResult = this.validator.validate("digitalContentGetDtoInType", dtoIn);
     // A1, A2
     let uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
@@ -172,16 +172,15 @@ class SubjectAbl {
     // HDS 3
     dtoIn.awid = awid;
 
-    let subject = await this.dao.get(dtoIn);
-    if (!subject) {
+    let digitalContent = await this.dao.get(dtoIn);
+    if (!digitalContent) {
       // A6
-      throw new Errors.Get.SubjectDaoGetFailed(uuAppErrorMap, { subjectId: dtoIn.id });
+      throw new Errors.Get.DigitalContentDaoGetFailed(uuAppErrorMap, { digitalContentId: dtoIn.id });
     }
 
     // HDS 4
-    subject.uuAppErrorMap = uuAppErrorMap;
-    return subject;
-
+    digitalContent.uuAppErrorMap = uuAppErrorMap;
+    return digitalContent;
   }
 
   async create(awid, dtoIn) {
@@ -193,7 +192,7 @@ class SubjectAbl {
     );
 
     // HDS 2
-    let validationResult = this.validator.validate("subjectCreateDtoInType", dtoIn);
+    let validationResult = this.validator.validate("digitalContentCreateDtoInType", dtoIn);
     // A1, A2
     let uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
@@ -204,24 +203,24 @@ class SubjectAbl {
     //TODO update object in uuBT
 
 
-    let subject;
+    let digitalContent;
     dtoIn.awid = awid;
 
     try {
-      subject = await this.dao.create(dtoIn);
+      digitalContent = await this.dao.create(dtoIn);
     } catch (e) {
       // A8
       if (e instanceof ObjectStoreError) {
-        throw new Errors.Create.subjectDaoCreateFailed({ uuAppErrorMap }, e);
+        throw new Errors.Create.digitalContentDaoCreateFailed({ uuAppErrorMap }, e);
       }
       throw e;
     }
 
     // HDS 8
-    subject.uuAppErrorMap = uuAppErrorMap;
-    return subject;
+    digitalContent.uuAppErrorMap = uuAppErrorMap;
+    return digitalContent;
   }
 
 }
 
-module.exports = new SubjectAbl();
+module.exports = new DigitalContentAbl();

@@ -1,15 +1,28 @@
 "use strict";
-
 const SubjectAbl = require("../../abl/subject-abl.js");
 
 class SubjectController {
-  static create(ucEnv) {
-    return SubjectAbl.create(ucEnv.uri.getAwid(), ucEnv.parameters, ucEnv.session, ucEnv.getAuthorizationResult());
+
+  list(ucEnv) {
+    return SubjectAbl.list(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
 
-  static get(ucEnv) {
-    return SubjectAbl.get(ucEnv.uri.getAwid(), ucEnv.parameters, ucEnv.getAuthorizationResult());
+  edit(ucEnv) {
+    return SubjectAbl.edit(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
+
+  remove(ucEnv) {
+    return SubjectAbl.remove(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  }
+
+  get(ucEnv) {
+    return SubjectAbl.get(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  }
+
+  create(ucEnv) {
+    return SubjectAbl.create(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  }
+
 }
 
-module.exports = SubjectController;
+module.exports = new SubjectController();

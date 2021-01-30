@@ -1,10 +1,10 @@
 "use strict";
 
 const SubjectmanMainUseCaseError = require("./subjectman-main-use-case-error.js");
-const SUBJECT_ERROR_PREFIX = `${SubjectmanMainUseCaseError.ERROR_PREFIX}subject/`;
+const TOPIC_ERROR_PREFIX = `${SubjectmanMainUseCaseError.ERROR_PREFIX}topic/`;
 
 const Create = {
-  UC_CODE: `${SUBJECT_ERROR_PREFIX}create/`,
+  UC_CODE: `${TOPIC_ERROR_PREFIX}create/`,
 
   InvalidDtoIn: class extends SubjectmanMainUseCaseError {
     constructor() {
@@ -35,17 +35,17 @@ const Create = {
       this.message = "DtoIn is not valid.";
     }
   },
-  subjectDaoCreateFailed: class extends SubjectmanMainUseCaseError {
+  topicDaoCreateFailed: class extends SubjectmanMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Create.UC_CODE}subjectDaoCreateFailed`;
-      this.message = "Create subject by subject DAO create failed.";
+      this.code = `${Create.UC_CODE}topicDaoCreateFailed`;
+      this.message = "Create topic by topic DAO create failed.";
     }
   }
 };
 
 const Get = {
-  UC_CODE: `${SUBJECT_ERROR_PREFIX}get/`,
+  UC_CODE: `${TOPIC_ERROR_PREFIX}get/`,
   InvalidDtoIn: class extends SubjectmanMainUseCaseError {
     constructor() {
       super(...arguments);
@@ -67,56 +67,17 @@ const Get = {
       this.message = "SubjectManInstance is not in proper state [active|underConstruction].";
     }
   },
-  SubjectDaoGetFailed: class extends SubjectmanMainUseCaseError {
+  TopicDaoGetFailed: class extends SubjectmanMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}subjectDaoGetFailed`;
-      this.message = "Get subject by subject DAO get failed.";
-    }
-  }
-};
-
-const Remove = {
-  UC_CODE: `${SUBJECT_ERROR_PREFIX}remove/`,
-  InvalidDtoIn: class extends SubjectmanMainUseCaseError {
-    constructor() {
-      super(...arguments);
-      this.code = `${Remove.UC_CODE}invalidDtoIn`;
-      this.message = "DtoIn is not valid.";
-    }
-  },
-  SubjectmanInstanceDoesNotExist: class extends SubjectmanMainUseCaseError {
-    constructor() {
-      super(...arguments);
-      this.code = `${Remove.UC_CODE}subjectManInstanceDoesNotExist`;
-      this.message = "SubjectManInstance does not exist.";
-    }
-  },
-  SubjectmanInstanceNotInProperState: class extends SubjectmanMainUseCaseError {
-    constructor() {
-      super(...arguments);
-      this.code = `${Remove.UC_CODE}subjectManInstanceNotInProperState`;
-      this.message = "SubjectManInstance is not in proper state [active|underConstruction].";
-    }
-  },
-  SubjectDaoDeleteFailed: class extends SubjectmanMainUseCaseError {
-    constructor() {
-      super(...arguments);
-      this.code = `${Remove.UC_CODE}subjectDaoDeleteFailed`;
-      this.message = "Delete subject by subject DAO delete failed.";
-    }
-  },
-  SubjectDoesNotExist: class extends SubjectmanMainUseCaseError {
-    constructor() {
-      super(...arguments);
-      this.code = `${Remove.UC_CODE}subjectDoesNotExist`;
-      this.message = "Subject does not exist.";
+      this.code = `${Get.UC_CODE}topicDaoGetFailed`;
+      this.message = "Get topic by topic DAO get failed.";
     }
   }
 };
 
 const Edit = {
-  UC_CODE: `${SUBJECT_ERROR_PREFIX}edit/`,
+  UC_CODE: `${TOPIC_ERROR_PREFIX}edit/`,
   InvalidDtoIn: class extends SubjectmanMainUseCaseError {
     constructor() {
       super(...arguments);
@@ -138,24 +99,64 @@ const Edit = {
       this.message = "SubjectManInstance is not in proper state [active|underConstruction].";
     }
   },
-  SubjectDaoUpdateFailed: class extends SubjectmanMainUseCaseError {
+  TopicDaoUpdateFailed: class extends SubjectmanMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Edit.UC_CODE}subjectDaoUpdateFailed`;
-      this.message = "Edit subject by subject DAO update failed.";
+      this.code = `${Edit.UC_CODE}topicDaoUpdateFailed`;
+      this.message = "Edit topic by topic DAO update failed.";
     }
   },
-  SubjectDoesNotExist: class extends SubjectmanMainUseCaseError {
+  TopicDoesNotExist: class extends SubjectmanMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Edit.UC_CODE}subjectDoesNotExist`;
-      this.message = "Subject does not exist.";
+      this.code = `${Edit.UC_CODE}topicDoesNotExist`;
+      this.message = "Topic does not exist.";
+    }
+  }
+
+};
+
+const Remove = {
+  UC_CODE: `${TOPIC_ERROR_PREFIX}remove/`,
+  InvalidDtoIn: class extends SubjectmanMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Remove.UC_CODE}invalidDtoIn`;
+      this.message = "DtoIn is not valid.";
+    }
+  },
+  SubjectmanInstanceDoesNotExist: class extends SubjectmanMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Remove.UC_CODE}subjectManInstanceDoesNotExist`;
+      this.message = "SubjectManInstance does not exist.";
+    }
+  },
+  SubjectmanInstanceNotInProperState: class extends SubjectmanMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Remove.UC_CODE}subjectManInstanceNotInProperState`;
+      this.message = "SubjectManInstance is not in proper state [active|underConstruction].";
+    }
+  },
+  TopicDaoDeleteFailed: class extends SubjectmanMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Remove.UC_CODE}topicDaoDeleteFailed`;
+      this.message = "Delete topic by topic DAO delete failed.";
+    }
+  },
+  TopicDoesNotExist: class extends SubjectmanMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Remove.UC_CODE}topicDoesNotExist`;
+      this.message = "Topic does not exist.";
     }
   }
 };
 
 const List = {
-  UC_CODE: `${SUBJECT_ERROR_PREFIX}list/`,
+  UC_CODE: `${TOPIC_ERROR_PREFIX}list/`,
   InvalidDtoIn: class extends SubjectmanMainUseCaseError {
     constructor() {
       super(...arguments);
@@ -181,8 +182,8 @@ const List = {
 
 module.exports = {
   List,
-  Edit,
   Remove,
+  Edit,
   Get,
   Create
 };

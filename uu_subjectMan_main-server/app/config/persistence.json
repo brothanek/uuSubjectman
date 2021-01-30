@@ -7,6 +7,9 @@
         "subjectManMain": {
           "realization": "dao/SubjectmanMainMongo"
         },
+        "subjectman": {
+          "realization": "dao/SubjectmanMongo"
+        },
         "subjectManInstance": {
           "realization": "dao/SubjectmanInstanceMongo",
           "maxNoi": 1
