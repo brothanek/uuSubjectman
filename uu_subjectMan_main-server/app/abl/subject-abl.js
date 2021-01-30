@@ -21,12 +21,18 @@ const WARNINGS = {
   },
   listUnsupportedKeys: {
     code: `${Errors.List.UC_CODE}unsupportedKeys`,
+  },
+  subjectEditTopicMissing: {
+    code: `${Errors.Edit.UC_CODE}subjectEditTopicMissing`,
+  },
+  subjectCreateTopicMissing: {
+    code: `${Errors.Create.UC_CODE}subjectCreateTopicMissing`,
   }
 };
 
 const DEFAULTS = {
   list: {
-    sortBy: "topicName",
+    sortBy: "name",
     order: "asc",
     pageIndex: 0,
     pageSize: 100,
@@ -38,6 +44,7 @@ class SubjectAbl {
   constructor() {
     this.validator = Validator.load();
     this.dao = DaoFactory.getDao("subject");
+    this.daoTopic = DaoFactory.getDao("topic");
   }
 
   async list(awid, dtoIn) {
@@ -94,6 +101,26 @@ class SubjectAbl {
 
     let subjectExist = await this.dao.get({id: dtoIn.id, awid: awid});
     if  (!subjectExist) throw new Errors.Edit.SubjectDoesNotExist({ uuAppErrorMap }, {id: dtoIn.id} )
+
+    if (dtoIn.topicIdList){
+      let topics = await this.daoTopic.getByIds( awid, dtoIn.topicIdList )
+      if (topics.itemList.length < dtoIn.topicIdList.length){
+        let topicIds = [];
+        let missingTopic = [];
+        for (const topicId of dtoIn.topicIdList){
+          if (topics.itemList.find( topic => topicId==topic.id)){
+            topicIds.push(topicId);
+          }
+          else{
+            missingTopic.push(topicId);
+          }
+        }
+        dtoIn.topicIdList=topicIds;
+        if(missingTopic.length) {
+          ValidationHelper.addWarning(uuAppErrorMap, WARNINGS.subjectEditTopicMissing.code, {missingTopic: missingTopic});
+        }
+      }
+    }
 
     let subject;
     dtoIn.awid = awid;
@@ -203,6 +230,25 @@ class SubjectAbl {
     );
     //TODO update object in uuBT
 
+    if (dtoIn.topicIdList){
+      let topics = await this.daoTopic.getByIds( awid, dtoIn.topicIdList )
+      if (topics.itemList.length < dtoIn.topicIdList.length){
+        let topicIds = [];
+        let missingTopic = [];
+        for (const topicId of dtoIn.topicIdList){
+          if (topics.itemList.find( topic => topicId==topic.id)){
+            topicIds.push(topicId);
+          }
+          else{
+            missingTopic.push(topicId);
+          }
+        }
+        dtoIn.topicIdList=topicIds;
+        if(missingTopic.length) {
+          ValidationHelper.addWarning(uuAppErrorMap, WARNINGS.subjectCreateTopicMissing.code, {missingTopic: missingTopic});
+        }
+      }
+    }
 
     let subject;
     dtoIn.awid = awid;
