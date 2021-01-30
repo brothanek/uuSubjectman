@@ -3,6 +3,7 @@ import UU5 from "uu5g04";
 import { useLsi } from "uu5g04-hooks";
 import Editable from "../../../components/Editable";
 import Lsi from "../../../config/lsi";
+import Calls from "calls";
 
 function Topic({ params }) {
   const [edit, setEdit] = useState(false);
@@ -10,21 +11,22 @@ function Topic({ params }) {
   const { id, topicName, contentIdList } = values;
 
   const submitBtn = useLsi(Lsi.common.submit);
-  const editBtn = edit ? useLsi(Lsi.common.cancel) : useLsi(Lsi.common.edit);
+  const primaryBtn = edit ? useLsi(Lsi.common.cancel) : useLsi(Lsi.common.edit);
 
   const propsForEditable = { edit, setEdit, setValues, values };
 
-  const handleSubmit = () => {
-    setEdit(false);
-
-    // POST req to BE
+  const handleSubmit = async () => {
     try {
+      let result = await Calls.updateTopic(values);
       UU5.Environment.getPage().getAlertBus().addAlert({
         content: `Editation succeeded!`,
         colorSchema: "green",
       });
-    } catch (e) {}
-    console.log(values);
+      setEdit(false);
+      setValues(result);
+    } catch (e) {
+      console.warn(e);
+    }
   };
 
   return (
@@ -59,10 +61,9 @@ function Topic({ params }) {
         <UU5.Bricks.Button
           onClick={() => {
             setEdit(!edit);
-            setValues(params);
           }}
         >
-          {editBtn}
+          {primaryBtn}
         </UU5.Bricks.Button>
         {edit && (
           <UU5.Bricks.Button onClick={handleSubmit} type="submit">

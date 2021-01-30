@@ -1,0 +1,10 @@
+{
+  "id": 1,
+  "subjectName": "EDIT Software development",
+  "credits": 5,
+  "degree": "bc",
+  "languages": ["CZ"],
+  "description": "brief subject's overview",
+  "topicIdList": ["1"],
+  "state": "active"
+}

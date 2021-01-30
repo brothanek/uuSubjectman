@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import UU5 from "uu5g04";
+import Calls from "calls";
 import { useLsi } from "uu5g04-hooks";
 import Editable from "../../../components/Editable";
 import Lsi from "../../../config/lsi";
@@ -14,17 +15,18 @@ function Content({ params }) {
 
   const propsForEditable = { edit, setEdit, setValues, values };
 
-  const handleSubmit = () => {
-    setEdit(false);
-
-    // POST req to BE
+  const handleSubmit = async () => {
     try {
+      let result = await Calls.updateContent(values);
+      setValues(result);
+      setEdit(false);
       UU5.Environment.getPage().getAlertBus().addAlert({
         content: `Editation succeeded!`,
         colorSchema: "green",
       });
-    } catch (e) {}
-    console.log(values);
+    } catch (e) {
+      console.warn(e);
+    }
   };
 
   return (

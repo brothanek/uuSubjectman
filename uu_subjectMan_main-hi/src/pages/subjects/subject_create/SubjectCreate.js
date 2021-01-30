@@ -8,8 +8,6 @@ const data = [
 
 function SubjectCreate() {
   const handleSubmit = (values) => {
-    console.log(values);
-
     UU5.Environment.getPage().getAlertBus().addAlert({
       content: `Creation succeeded!`,
       colorSchema: "green",

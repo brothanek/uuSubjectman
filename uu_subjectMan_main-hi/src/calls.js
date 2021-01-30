@@ -12,6 +12,41 @@ let Calls = {
     let response = await Plus4U5.Common.Calls.call(method, url, dtoIn, clientOptions);
     return response.data;
   },
+  // topics
+
+  updateTopic(dtoIn) {
+    let commandUri = Calls.getCommandUri("topic/update");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+
+  listTopics(dtoIn) {
+    let commandUri = Calls.getCommandUri("topic/list");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+
+  // subjects
+
+  updateSubject(dtoIn) {
+    let commandUri = Calls.getCommandUri("subject/update");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+
+  listSubjects(dtoIn) {
+    let commandUri = Calls.getCommandUri("subject/list");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+
+  // contents
+
+  updateContent(dtoIn) {
+    let commandUri = Calls.getCommandUri("content/update");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+
+  listContents(dtoIn) {
+    let commandUri = Calls.getCommandUri("content/list");
+    return Calls.call("get", commandUri, dtoIn);
+  },
 
   loadDemoContent(dtoIn) {
     let commandUri = Calls.getCommandUri("loadDemoContent");

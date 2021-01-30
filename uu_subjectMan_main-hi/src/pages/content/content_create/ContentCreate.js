@@ -3,8 +3,6 @@ import UU5 from "uu5g04";
 
 function ContentCreate() {
   const handleSubmit = (values) => {
-    console.log(values);
-
     UU5.Environment.getPage().getAlertBus().addAlert({
       content: `Creation succeeded!`,
       colorSchema: "green",
