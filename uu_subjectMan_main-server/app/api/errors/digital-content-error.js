@@ -157,7 +157,33 @@ const Remove = {
 
 };
 
+const List = {
+  UC_CODE: `${DIGITAL_CONTENT_ERROR_PREFIX}list/`,
+  InvalidDtoIn: class extends SubjectmanMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${List.UC_CODE}invalidDtoIn`;
+      this.message = "DtoIn is not valid.";
+    }
+  },
+  SubjectmanInstanceDoesNotExist: class extends SubjectmanMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${List.UC_CODE}subjectManInstanceDoesNotExist`;
+      this.message = "SubjectManInstance does not exist.";
+    }
+  },
+  SubjectmanInstanceNotInProperState: class extends SubjectmanMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${List.UC_CODE}subjectManInstanceNotInProperState`;
+      this.message = "SubjectManInstance is not in proper state [active|underConstruction].";
+    }
+  },
+};
+
 module.exports = {
+  List,
   Remove,
   Edit,
   Get,

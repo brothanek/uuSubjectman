@@ -18,6 +18,18 @@ const WARNINGS = {
   },
   removeUnsupportedKeys: {
     code: `${Errors.Edit.UC_CODE}unsupportedKeys`,
+  },
+  listUnsupportedKeys: {
+    code: `${Errors.List.UC_CODE}unsupportedKeys`,
+  }
+};
+
+const DEFAULTS = {
+  list: {
+    sortBy: "contentName",
+    order: "asc",
+    pageIndex: 0,
+    pageSize: 100,
   }
 };
 
@@ -26,6 +38,40 @@ class DigitalContentAbl {
   constructor() {
     this.validator = Validator.load();
     this.dao = DaoFactory.getDao("digitalContent");
+  }
+
+  async list(awid, dtoIn) {
+    await SubjectmanAbl.checkInstance(
+      awid,
+      Errors.List.SubjectmanInstanceDoesNotExist,
+      Errors.List.SubjectmanInstanceNotInProperState
+    );
+
+    // HDS 2
+    let validationResult = this.validator.validate("digitalContentListDtoInType", dtoIn);
+    // A1, A2
+    let uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      WARNINGS.listUnsupportedKeys.code,
+      Errors.List.InvalidDtoIn
+    );
+    //TODO create object in uuBT
+
+    // HDS 3
+    dtoIn.awid = awid;
+
+    if (!dtoIn.sortBy) dtoIn.sortBy = DEFAULTS.list.sortBy;
+    if (!dtoIn.order) dtoIn.order = DEFAULTS.list.order;
+    if (!dtoIn.pageInfo) dtoIn.pageInfo = {};
+    if (!dtoIn.pageInfo.pageSize) dtoIn.pageInfo.pageSize = DEFAULTS.list.pageSize;
+    if (!dtoIn.pageInfo.pageIndex) dtoIn.pageInfo.pageIndex = DEFAULTS.list.pageIndex;
+
+    let digitalContent = await this.dao.list(dtoIn);
+
+    // HDS 4
+    digitalContent.uuAppErrorMap = uuAppErrorMap;
+    return digitalContent;
   }
 
   async remove(awid, dtoIn) {
@@ -41,7 +87,7 @@ class DigitalContentAbl {
     let uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
       validationResult,
-      WARNINGS.createUnsupportedKeys.code,
+      WARNINGS.removeUnsupportedKeys.code,
       Errors.Remove.InvalidDtoIn
     );
     //TODO update object in uuBT
@@ -79,7 +125,7 @@ class DigitalContentAbl {
     let uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
       validationResult,
-      WARNINGS.createUnsupportedKeys.code,
+      WARNINGS.editUnsupportedKeys.code,
       Errors.Edit.InvalidDtoIn
     );
     //TODO update object in uuBT

@@ -50,6 +50,11 @@
         "realization": "api/controllers/DigitalContentController.remove",
         "httpMethod": "POST",
         "type": "CMD"
+      },
+      "digitalContent/list": {
+        "realization": "api/controllers/DigitalContentController.list",
+        "httpMethod": "GET",
+        "type": "CMD"
       }
     }
   }

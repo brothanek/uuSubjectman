@@ -44,6 +44,10 @@
       "digitalContent/remove": {
         "sysStateList": ["active"],
         "profileList": ["Authorities","Executives","Teachers","HeadMasters"]
+      },
+      "digitalContent/list": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives","Teachers","HeadMasters","Students"]
       }
     }
   }

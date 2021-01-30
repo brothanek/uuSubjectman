@@ -25,9 +25,7 @@ class digitalContentMongo extends UuObjectDao {
 
   async list(uuObject) {
     const sort = { [uuObject.sortBy]: uuObject.order === "asc" ? 1 : -1 };
-    let filter = { awid: uuObject.awid };
-    if (uuObject.filterMap) filter = { ...filter, ...uuObject.filterMap };
-    return await super.find(filter, uuObject.pageInfo, sort);
+    return await super.find( { awid: uuObject.awid }, uuObject.pageInfo, sort);
   }
 
   async delete(uuObject) {

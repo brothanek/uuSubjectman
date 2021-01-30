@@ -20,4 +20,11 @@ const digitalContentRemoveDtoInType = shape({
   id: id().isRequired()
 });
 
-
+const digitalContentListDtoInType = shape({
+  sortBy: oneOf(["contentName","contentType"]),
+  order: oneOf(["asc", "desc"]),
+  pageInfo: shape({
+    pageIndex: integer(),
+    pageSize: integer(),
+  })
+});
