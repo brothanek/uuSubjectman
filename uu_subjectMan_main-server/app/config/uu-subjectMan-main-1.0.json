@@ -89,7 +89,7 @@
     "uun-bpmi20wpt03-maing01/topic/create": "11110000-00000000-00000000-00000000",
     "uun-bpmi20wpt03-maing01/topic/get": "11111000-00000000-00000000-00000000",
     "uun-bpmi20wpt03-maing01/topic/list": "11111000-00000000-00000000-00000000",
-    "uun-bpmi20wpt03-maing01/topic/edit": "111100000-00000000-00000000-00000000",
+    "uun-bpmi20wpt03-maing01/topic/edit": "11110000-00000000-00000000-00000000",
     "uun-bpmi20wpt03-maing01/topic/remove": "11110000-00000000-00000000-00000000",
     "uun-bpmi20wpt03-maing01/digitalContent/create": "11110000-00000000-00000000-00000000",
     "uun-bpmi20wpt03-maing01/digitalContent/get": "11111000-00000000-00000000-00000000",
