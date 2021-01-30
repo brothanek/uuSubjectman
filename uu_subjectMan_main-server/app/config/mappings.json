@@ -70,6 +70,11 @@
         "realization": "api/controllers/TopicController.list",
         "httpMethod": "GET",
         "type": "CMD"
+      },
+      "subject/create": {
+        "realization": "api/controllers/SubjectController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
       }
     }
   }

@@ -1,27 +1,36 @@
 "use strict";
-
 const { UuObjectDao } = require("uu_appg01_server").ObjectStore;
-const { ObjectId } = require("bson");
-const { DbConnection } = require("uu_appg01_datastore");
 
-class SubjectMongo extends UuObjectDao {
+class subjectMongo extends UuObjectDao {
   async createSchema() {
-    await super.createIndex({ awid: 1, _id: 1 }, { unique: true });
-    await super.createIndex({ awid: 1, topicIdList: 1 });
-    await super.createIndex({ awid: 1, topicIdList: 1 });
-    await super.createIndex({ awid: 1, topicIdList: 1 });
+    await super.createIndex({ awid: 1 }, { unique: true });
   }
 
   async create(uuObject) {
-    if (uuObject.topicIdList) {
-      uuObject.topicIdList = uuObject.topicIdList.map(topicId => new ObjectId(topicId));
-     }
     return await super.insertOne(uuObject);
   }
 
-  async get(awid, id) {
-    return await super.findOne({ id, awid });
+  async update(uuObject) {
+    let filter = { awid: uuObject.awid, id: uuObject.id };
+    return await super.findOneAndUpdate(filter, uuObject, "NONE");
+  }
+
+  async getByAwid(awid) {
+    return await super.findOne({ awid: awid });
+  }
+
+  async get(uuObject) {
+    return await super.findOne(uuObject);
+  }
+
+  async list(uuObject) {
+    const sort = { [uuObject.sortBy]: uuObject.order === "asc" ? 1 : -1 };
+    return await super.find( { awid: uuObject.awid }, uuObject.pageInfo, sort);
+  }
+
+  async delete(uuObject) {
+    await super.deleteOne(uuObject);
   }
 }
 
-module.exports = SubjectMongo;
+module.exports = subjectMongo;

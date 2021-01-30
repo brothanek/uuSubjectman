@@ -68,6 +68,10 @@
       "topic/list": {
         "sysStateList": ["active"],
         "profileList": ["Authorities","Executives","Teachers","HeadMasters","Students"]
+      },
+      "subject/create": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives","Teachers","HeadMasters"]
       }
     }
   }
