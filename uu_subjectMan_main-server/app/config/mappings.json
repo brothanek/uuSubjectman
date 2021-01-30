@@ -55,6 +55,11 @@
         "realization": "api/controllers/DigitalContentController.list",
         "httpMethod": "GET",
         "type": "CMD"
+      },
+      "topic/create": {
+        "realization": "api/controllers/TopicController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
       }
     }
   }
