@@ -55,6 +55,11 @@
         "realization": "api/controllers/TopicController.get",
         "httpMethod": "GET",
         "type": "CMD"
+      },
+      "topic/edit": {
+        "realization": "api/controllers/TopicController.edit",
+        "httpMethod": "POST",
+        "type": "CMD"
       }
     }
   }

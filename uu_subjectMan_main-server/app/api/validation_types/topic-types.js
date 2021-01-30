@@ -6,3 +6,8 @@ const topicCreateDtoInType = shape({
 const topicGetDtoInType = shape({
   id: id().isRequired()
 });
+const topicEditDtoInType = shape({
+  id: id().isRequired(),
+  topicName: string(200),
+  contentIdList: array(id(), 10)
+});

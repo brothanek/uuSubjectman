@@ -12,6 +12,9 @@ const WARNINGS = {
   },
   getUnsupportedKeys: {
     code: `${Errors.Get.UC_CODE}unsupportedKeys`,
+  },
+  editUnsupportedKeys: {
+    code: `${Errors.Get.UC_CODE}unsupportedKeys`,
   }
 };
 
@@ -20,6 +23,45 @@ class TopicAbl {
   constructor() {
     this.validator = Validator.load();
     this.dao = DaoFactory.getDao("topic");
+  }
+
+  async edit(awid, dtoIn) {
+    await SubjectmanAbl.checkInstance(
+      awid,
+      Errors.Edit.SubjectmanInstanceDoesNotExist,
+      Errors.Edit.SubjectmanInstanceNotInProperState
+    );
+
+    // HDS 2
+    let validationResult = this.validator.validate("topicEditDtoInType", dtoIn);
+    // A1, A2
+    let uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      WARNINGS.editUnsupportedKeys.code,
+      Errors.Edit.InvalidDtoIn
+    );
+    //TODO update object in uuBT
+
+    let topicExist = await this.dao.get({id: dtoIn.id, awid: awid});
+    if  (!topicExist) throw new Errors.Edit.TopicDoesNotExist({ uuAppErrorMap }, {id: dtoIn.id} )
+
+    let topic;
+    dtoIn.awid = awid;
+
+    try {
+      topic = await this.dao.update(dtoIn);
+    } catch (e) {
+      // A8
+      if (e instanceof ObjectStoreError) {
+        throw new Errors.Edit.TopicDaoUpdateFailed({ uuAppErrorMap }, e);
+      }
+      throw e;
+    }
+
+    // HDS 8
+    topic.uuAppErrorMap = uuAppErrorMap;
+    return topic;
   }
 
   async get(awid, dtoIn) {

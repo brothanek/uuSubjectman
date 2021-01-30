@@ -76,7 +76,48 @@ const Get = {
   }
 };
 
+const Edit = {
+  UC_CODE: `${TOPIC_ERROR_PREFIX}edit/`,
+  InvalidDtoIn: class extends SubjectmanMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Edit.UC_CODE}invalidDtoIn`;
+      this.message = "DtoIn is not valid.";
+    }
+  },
+  SubjectmanInstanceDoesNotExist: class extends SubjectmanMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Edit.UC_CODE}subjectManInstanceDoesNotExist`;
+      this.message = "SubjectManInstance does not exist.";
+    }
+  },
+  SubjectmanInstanceNotInProperState: class extends SubjectmanMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Edit.UC_CODE}subjectManInstanceNotInProperState`;
+      this.message = "SubjectManInstance is not in proper state [active|underConstruction].";
+    }
+  },
+  TopicDaoUpdateFailed: class extends SubjectmanMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Edit.UC_CODE}topicDaoUpdateFailed`;
+      this.message = "Edit topic by topic DAO update failed.";
+    }
+  },
+  TopicDoesNotExist: class extends SubjectmanMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Edit.UC_CODE}topicDoesNotExist`;
+      this.message = "Topic does not exist.";
+    }
+  }
+
+};
+
 module.exports = {
+  Edit,
   Get,
   Create
 };
