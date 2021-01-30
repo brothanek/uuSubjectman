@@ -40,6 +40,11 @@
         "realization": "api/controllers/DigitalContentController.get",
         "httpMethod": "GET",
         "type": "CMD"
+      },
+      "digitalContent/edit": {
+        "realization": "api/controllers/DigitalContentController.edit",
+        "httpMethod": "POST",
+        "type": "CMD"
       }
     }
   }

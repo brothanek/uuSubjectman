@@ -9,5 +9,11 @@ const digitalContentGetDtoInType = shape({
   id: id().isRequired()
 });
 
+const digitalContentEditDtoInType = shape({
+  id: id().isRequired(),
+  contentType: oneOf(['uuCourse','uuBook','video','other']),
+  contentName: string(200),
+  link: uri()
+});
 
 
