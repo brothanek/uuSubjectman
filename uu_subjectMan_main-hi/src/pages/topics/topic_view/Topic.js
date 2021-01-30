@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import UU5 from "uu5g04";
-import { useLsi } from "uu5g04-hooks";
+import { useLsi, useDataList } from "uu5g04-hooks";
 import Editable from "../../../components/Editable";
 import Lsi from "../../../config/lsi";
 import Calls from "calls";
@@ -9,6 +9,17 @@ function Topic({ params }) {
   const [edit, setEdit] = useState(false);
   const [values, setValues] = useState(params);
   const { id, topicName, contentIdList } = values;
+
+  const dataListResult = useDataList({
+    pageSize: 50,
+    handlerMap: {
+      load: Calls.listContents,
+      createItem: Calls.createSubject,
+    },
+    itemHandlerMap: {
+      delete: Calls.deleteSubject,
+    },
+  });
 
   const submitBtn = useLsi(Lsi.common.submit);
   const primaryBtn = edit ? useLsi(Lsi.common.cancel) : useLsi(Lsi.common.edit);
@@ -28,7 +39,7 @@ function Topic({ params }) {
       console.warn(e);
     }
   };
-
+  const data = (dataListResult?.data || []).map(({ data }) => data);
   return (
     <div>
       <UU5.Bricks.Header
@@ -50,11 +61,11 @@ function Topic({ params }) {
           <Editable
             {...propsForEditable}
             valueType="contentIdList"
-            options={["1", "2", "3", "12", "23"]} // TODO - get all contents from database
+            options={data.map((item) => ({ ...item, name: item.contentName }))}
             multiple
             inputType="select"
           >
-            {(contentIdList || []).join(",")}
+            {(data || []).map(({ contentName }) => contentName).join(",")}
           </Editable>
         </UU5.Bricks.Section>
 

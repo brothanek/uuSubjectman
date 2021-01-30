@@ -17,6 +17,8 @@ const Editable = ({
     setValues({ ...values, [valueType]: value });
   };
 
+  const optionsAreObjects = typeof options[0] === "object";
+
   const props = { onChange: handleChange, value: values[valueType], ...rest };
   const components = {
     input: { name: "input", props },
@@ -30,12 +32,18 @@ const Editable = ({
             const changedVal = multiple ? [...values[valueType], value] : [value];
             setValues({ ...values, [valueType]: changedVal });
           }
-          if (type === "remove")
-            setValues({ ...values, [valueType]: [...values[valueType].filter((el) => el !== value)] });
-          return;
+          if (type === "remove") {
+            setValues({ ...values, [valueType]: [...values[valueType].filter((el) => el != value)] });
+          } else return;
         },
         multiple,
-        children: options.map((el) => <UU5.Forms.Select.Option value={el} />),
+        children: options.map((item) => {
+          if (optionsAreObjects) {
+            return <UU5.Forms.Select.Option value={item?.id.toString()}>{item.name}</UU5.Forms.Select.Option>;
+          } else {
+            return <UU5.Forms.Select.Option value={item} />;
+          }
+        }),
       },
     },
   };

@@ -46,7 +46,7 @@ function SubjectList() {
           {(dataListResult?.data || []).map(({ data, handlerMap }) => {
             const { credits, subjectName, id, degree, languages = [], state } = data;
             return (
-              <UU5.Bricks.Table.Tr>
+              <UU5.Bricks.Table.Tr key={data}>
                 <UU5.Bricks.Table.Td
                   content={
                     <UU5.Bricks.Link

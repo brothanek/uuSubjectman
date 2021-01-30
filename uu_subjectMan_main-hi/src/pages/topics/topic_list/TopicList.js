@@ -41,7 +41,7 @@ function TopicList() {
 
         <UU5.Bricks.Table.TBody>
           {(dataListResult?.data || []).map(({ data, handlerMap }) => (
-            <UU5.Bricks.Table.Tr>
+            <UU5.Bricks.Table.Tr key={data}>
               <UU5.Bricks.Table.Td
                 content={
                   <UU5.Bricks.Link
