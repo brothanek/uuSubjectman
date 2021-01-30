@@ -60,6 +60,16 @@
         "realization": "api/controllers/TopicController.edit",
         "httpMethod": "POST",
         "type": "CMD"
+      },
+      "topic/remove": {
+        "realization": "api/controllers/TopicController.remove",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "topic/list": {
+        "realization": "api/controllers/TopicController.list",
+        "httpMethod": "GET",
+        "type": "CMD"
       }
     }
   }
