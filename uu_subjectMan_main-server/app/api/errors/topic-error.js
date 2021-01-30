@@ -152,6 +152,13 @@ const Remove = {
       this.code = `${Remove.UC_CODE}topicDoesNotExist`;
       this.message = "Topic does not exist.";
     }
+  },
+  TopicHasSubjects: class extends SubjectmanMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Remove.UC_CODE}topicHasSubjects`;
+      this.message = "Topic belongs to subject.";
+    }
   }
 };
 

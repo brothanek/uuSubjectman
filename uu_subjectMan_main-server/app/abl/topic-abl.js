@@ -21,6 +21,12 @@ const WARNINGS = {
   },
   listUnsupportedKeys: {
     code: `${Errors.List.UC_CODE}unsupportedKeys`,
+  },
+  topicCreateContentMissing: {
+    code: `${Errors.Create.UC_CODE}topicCreateContentMissing`,
+  },
+  topicEditContentMissing:  {
+    code: `${Errors.Edit.UC_CODE}topicEditContentMissing`,
   }
 };
 
@@ -38,6 +44,8 @@ class TopicAbl {
   constructor() {
     this.validator = Validator.load();
     this.dao = DaoFactory.getDao("topic");
+    this.daoSubject = DaoFactory.getDao("subject");
+    this.daoDigitalContent = DaoFactory.getDao("digitalContent");
   }
 
   async list(awid, dtoIn) {
@@ -95,11 +103,21 @@ class TopicAbl {
     let topicExist = await this.dao.get({id: dtoIn.id, awid: awid});
     if  (!topicExist) throw new Errors.Remove.TopicDoesNotExist({ uuAppErrorMap }, {id: dtoIn.id} )
 
-    let topic;
     dtoIn.awid = awid;
 
+    let subjects = await this.daoSubject.listByTopic(dtoIn);
+    if (subjects.itemList.length > 0) {
+      subjects = subjects.itemList.map( subject => {
+        return {
+          subjectId: subject.id,
+          subjectName: subject.name
+        }
+      } )
+      throw new Errors.Remove.TopicHasSubjects({uuAppErrorMap}, { topicId: dtoIn.id, subjects })
+    }
+
     try {
-      topic = await this.dao.delete(dtoIn);
+      await this.dao.delete(dtoIn);
     } catch (e) {
       // A8
       if (e instanceof ObjectStoreError) {
@@ -132,6 +150,26 @@ class TopicAbl {
 
     let topicExist = await this.dao.get({id: dtoIn.id, awid: awid});
     if  (!topicExist) throw new Errors.Edit.TopicDoesNotExist({ uuAppErrorMap }, {id: dtoIn.id} )
+
+    if (dtoIn.contentIdList){
+      let contents = await this.daoDigitalContent.getByIds( awid, dtoIn.contentIdList )
+      if (contents.itemList.length < dtoIn.contentIdList.length){
+        let contentIds = [];
+        let missingContent = [];
+        for (const contentId of dtoIn.contentIdList){
+          if (contents.itemList.find( content => contentId==content.id)){
+            contentIds.push(contentId);
+          }
+          else{
+            missingContent.push(contentId);
+          }
+        }
+        dtoIn.contentIdList=contentIds;
+        if(missingContent.length) {
+          ValidationHelper.addWarning(uuAppErrorMap, WARNINGS.topicEditContentMissing.code, {missingContent: missingContent});
+        }
+      }
+    }
 
     let topic;
     dtoIn.awid = awid;
@@ -202,6 +240,26 @@ class TopicAbl {
     );
     //TODO update object in uuBT
 
+
+    if (dtoIn.contentIdList){
+      let contents = await this.daoDigitalContent.getByIds( awid, dtoIn.contentIdList )
+      if (contents.itemList.length < dtoIn.contentIdList.length){
+        let contentIds = [];
+        let missingContent = [];
+        for (const contentId of dtoIn.contentIdList){
+          if (contents.itemList.find( content => contentId==content.id)){
+            contentIds.push(contentId);
+          }
+          else{
+            missingContent.push(contentId);
+          }
+        }
+        dtoIn.contentIdList=contentIds;
+        if(missingContent.length) {
+          ValidationHelper.addWarning(uuAppErrorMap, WARNINGS.topicCreateContentMissing.code, {missingContent: missingContent});
+        }
+      }
+    }
 
     let topic;
     dtoIn.awid = awid;

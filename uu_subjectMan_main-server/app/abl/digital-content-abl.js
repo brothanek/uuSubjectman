@@ -38,6 +38,7 @@ class DigitalContentAbl {
   constructor() {
     this.validator = Validator.load();
     this.dao = DaoFactory.getDao("digitalContent");
+    this.daoTopic = DaoFactory.getDao("topic");
   }
 
   async list(awid, dtoIn) {
@@ -95,15 +96,25 @@ class DigitalContentAbl {
     let digitalContentExist = await this.dao.get({id: dtoIn.id, awid: awid});
     if  (!digitalContentExist) throw new Errors.Remove.DigitalContentDoesNotExist({ uuAppErrorMap }, {id: dtoIn.id} )
 
-    let digitalContent;
     dtoIn.awid = awid;
 
-    try {
-      digitalContent = await this.dao.delete(dtoIn);
+    let topics = await this.daoTopic.listByContent(dtoIn);
+    if (topics.itemList.length > 0) {
+      topics = topics.itemList.map( topic => {
+        return {
+          topicId: topic.id,
+          topicName: topic.topicName
+        }
+      } )
+      throw new Errors.Remove.DigitalContentHasTopics({uuAppErrorMap}, { digitalContentId: dtoIn.id, topics })
+    }
+
+     try {
+      await this.dao.delete(dtoIn);
     } catch (e) {
       // A8
       if (e instanceof ObjectStoreError) {
-        throw new Errors.Remove.digitalContentDaoDeleteFailed({ uuAppErrorMap }, e);
+        throw new Errors.Remove.DigitalContentDaoDeleteFailed({ uuAppErrorMap }, e);
       }
       throw e;
     }

@@ -28,6 +28,10 @@ class subjectMongo extends UuObjectDao {
     return await super.find( { awid: uuObject.awid }, uuObject.pageInfo, sort);
   }
 
+  async listByTopic(uuObject) {
+    return await super.find( { awid: uuObject.awid, topicIdList: uuObject.id });
+  }
+
   async delete(uuObject) {
     await super.deleteOne(uuObject);
   }

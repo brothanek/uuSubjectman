@@ -153,6 +153,13 @@ const Remove = {
       this.code = `${Remove.UC_CODE}digitalContentDoesNotExist`;
       this.message = "Digital Content does not exist.";
     }
+  },
+  DigitalContentHasTopics: class extends SubjectmanMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Remove.UC_CODE}digitalContentHasTopics`;
+      this.message = "Digital Content belongs to topic";
+    }
   }
 
 };
