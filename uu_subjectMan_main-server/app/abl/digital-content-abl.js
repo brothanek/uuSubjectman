@@ -15,6 +15,9 @@ const WARNINGS = {
   },
   editUnsupportedKeys: {
     code: `${Errors.Edit.UC_CODE}unsupportedKeys`,
+  },
+  removeUnsupportedKeys: {
+    code: `${Errors.Edit.UC_CODE}unsupportedKeys`,
   }
 };
 
@@ -23,6 +26,44 @@ class DigitalContentAbl {
   constructor() {
     this.validator = Validator.load();
     this.dao = DaoFactory.getDao("digitalContent");
+  }
+
+  async remove(awid, dtoIn) {
+    await SubjectmanAbl.checkInstance(
+      awid,
+      Errors.Remove.SubjectmanInstanceDoesNotExist,
+      Errors.Remove.SubjectmanInstanceNotInProperState
+    );
+
+    // HDS 2
+    let validationResult = this.validator.validate("digitalContentRemoveDtoInType", dtoIn);
+    // A1, A2
+    let uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      WARNINGS.createUnsupportedKeys.code,
+      Errors.Remove.InvalidDtoIn
+    );
+    //TODO update object in uuBT
+
+    let digitalContentExist = await this.dao.get({id: dtoIn.id, awid: awid});
+    if  (!digitalContentExist) throw new Errors.Remove.DigitalContentDoesNotExist({ uuAppErrorMap }, {id: dtoIn.id} )
+
+    let digitalContent;
+    dtoIn.awid = awid;
+
+    try {
+      digitalContent = await this.dao.delete(dtoIn);
+    } catch (e) {
+      // A8
+      if (e instanceof ObjectStoreError) {
+        throw new Errors.Remove.digitalContentDaoDeleteFailed({ uuAppErrorMap }, e);
+      }
+      throw e;
+    }
+
+    // HDS
+    return { uuAppErrorMap };
   }
 
   async edit(awid, dtoIn) {
@@ -54,7 +95,7 @@ class DigitalContentAbl {
     } catch (e) {
       // A8
       if (e instanceof ObjectStoreError) {
-        throw new Errors.Edit.digitalContentDaoEditFailed({ uuAppErrorMap }, e);
+        throw new Errors.Edit.DigitalContentDaoUpdateFailed({ uuAppErrorMap }, e);
       }
       throw e;
     }

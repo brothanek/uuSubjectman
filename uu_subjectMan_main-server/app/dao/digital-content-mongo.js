@@ -31,8 +31,7 @@ class digitalContentMongo extends UuObjectDao {
   }
 
   async delete(uuObject) {
-    const filter = { awid: uuObject.awid, id: uuObject.id };
-    await super.deleteOne(filter);
+    await super.deleteOne(uuObject);
   }
 }
 

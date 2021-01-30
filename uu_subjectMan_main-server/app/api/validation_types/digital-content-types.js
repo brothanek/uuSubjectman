@@ -16,4 +16,8 @@ const digitalContentEditDtoInType = shape({
   link: uri()
 });
 
+const digitalContentRemoveDtoInType = shape({
+  id: id().isRequired()
+});
+
 

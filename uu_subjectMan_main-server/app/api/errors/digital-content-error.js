@@ -82,42 +82,83 @@ const Edit = {
   InvalidDtoIn: class extends SubjectmanMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}invalidDtoIn`;
+      this.code = `${Edit.UC_CODE}invalidDtoIn`;
       this.message = "DtoIn is not valid.";
     }
   },
   SubjectmanInstanceDoesNotExist: class extends SubjectmanMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}subjectManInstanceDoesNotExist`;
+      this.code = `${Edit.UC_CODE}subjectManInstanceDoesNotExist`;
       this.message = "SubjectManInstance does not exist.";
     }
   },
   SubjectmanInstanceNotInProperState: class extends SubjectmanMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}subjectManInstanceNotInProperState`;
+      this.code = `${Edit.UC_CODE}subjectManInstanceNotInProperState`;
       this.message = "SubjectManInstance is not in proper state [active|underConstruction].";
     }
   },
-  DigitalContentDaoEditFailed: class extends SubjectmanMainUseCaseError {
+  DigitalContentDaoUpdateFailed: class extends SubjectmanMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}digitalContentDaoEditFailed`;
-      this.message = "Get digitalContent by digitalContent DAO edit failed.";
+      this.code = `${Edit.UC_CODE}digitalContentDaoUpdateFailed`;
+      this.message = "Edit digitalContent by digitalContent DAO update failed.";
     }
   },
   DigitalContentDoesNotExist: class extends SubjectmanMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}digitalContentDoesNotExist`;
+      this.code = `${Edit.UC_CODE}digitalContentDoesNotExist`;
       this.message = "Digital Content does not exist.";
     }
   },
 
 };
 
+const Remove = {
+  UC_CODE: `${DIGITAL_CONTENT_ERROR_PREFIX}remove/`,
+  InvalidDtoIn: class extends SubjectmanMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Remove.UC_CODE}invalidDtoIn`;
+      this.message = "DtoIn is not valid.";
+    }
+  },
+  SubjectmanInstanceDoesNotExist: class extends SubjectmanMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Remove.UC_CODE}subjectManInstanceDoesNotExist`;
+      this.message = "SubjectManInstance does not exist.";
+    }
+  },
+  SubjectmanInstanceNotInProperState: class extends SubjectmanMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Remove.UC_CODE}subjectManInstanceNotInProperState`;
+      this.message = "SubjectManInstance is not in proper state [active|underConstruction].";
+    }
+  },
+  DigitalContentDaoDeleteFailed: class extends SubjectmanMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Remove.UC_CODE}digitalContentDaoDeleteFailed`;
+      this.message = "Delete digitalContent by digitalContent DAO delete failed.";
+    }
+  },
+  DigitalContentDoesNotExist: class extends SubjectmanMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Remove.UC_CODE}digitalContentDoesNotExist`;
+      this.message = "Digital Content does not exist.";
+    }
+  }
+
+};
+
 module.exports = {
+  Remove,
   Edit,
   Get,
   Create
