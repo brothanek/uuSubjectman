@@ -21,13 +21,17 @@ function ContentList() {
       delete: Calls.deleteContent,
     },
   });
-  const header = useLsi(Lsi.subject.subjectList.header);
-  const name = useLsi(Lsi.common.name);
+  const lsiHeader = useLsi(Lsi.subject.header);
+  const lsiName = useLsi(Lsi.common.name);
+  const lsiManage = useLsi(Lsi.common.manage);
+  const lsiContentType = useLsi(Lsi.content.contentType);
+  const lsiConName = useLsi(Lsi.content.name);
+  const lsiAdd = useLsi(Lsi.content.add);
 
   const showModal = useCallback((onSave) => {
     const modal = modalRef.current;
     modal.open({
-      header: "Create Content",
+      header: lsiConName,
       content: <ContentCreate onSave={onSave} modal={modal} />,
     });
   }, []);
@@ -52,22 +56,22 @@ function ContentList() {
 
   return (
     <div>
-      <UU5.Bricks.Button onClick={handleCreate} content={"Add new Digital content"} />
+      <UU5.Bricks.Button onClick={handleCreate} content={lsiAdd} colorSchema="success" />
       {dataListResult?.data.length < 1 ? (
         <h1>{"There are no data to load :("}</h1>
       ) : (
-        <UU5.Bricks.Table hover condensed header={header}>
+        <UU5.Bricks.Table hover condensed header={lsiHeader}>
           <UU5.Bricks.Table.THead>
             <UU5.Bricks.Table.Tr>
-              <UU5.Bricks.Table.Th content={name} />
-              <UU5.Bricks.Table.Th content="Content type" />
+              <UU5.Bricks.Table.Th content={lsiName} />
+              <UU5.Bricks.Table.Th content={lsiContentType} />
               <UU5.Bricks.Table.Th content="Link" />
-              <UU5.Bricks.Table.Th content="Manage" />
+              {UU5.Environment.App.authorization.canManageAll() && <UU5.Bricks.Table.Th content={lsiManage} />}
             </UU5.Bricks.Table.Tr>
           </UU5.Bricks.Table.THead>
 
           <UU5.Bricks.Table.TBody>
-            {(dataListResult?.data || []).map(({ data, handlerMap }) => {
+            {(dataListResult?.data || []).map(({ data = {}, handlerMap = {} }) => {
               const { contentName = "", contentType = "", link = "" } = data;
               return (
                 <UU5.Bricks.Table.Tr key={data}>
@@ -84,9 +88,11 @@ function ContentList() {
                     style={{ maxWidth: "200px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
                     content={<a href={link}>{link} </a>}
                   />
-                  <UU5.Bricks.Table.Td
-                    content={<UU5.Bricks.Button onClick={() => handlerMap.delete()} content={"Delete"} />}
-                  />
+                  {UU5.Environment.App.authorization.canManageAll() && (
+                    <UU5.Bricks.Table.Td
+                      content={<UU5.Bricks.Button onClick={() => handlerMap.delete()} content={"Delete"} />}
+                    />
+                  )}
                 </UU5.Bricks.Table.Tr>
               );
             })}

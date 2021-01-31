@@ -116,13 +116,16 @@ function Subject({ params }) {
                 options={(data || []).map((item) => ({ ...item, name: item.topicName }))}
                 valueType="topicIdList"
                 style={{
-                  width: "150px",
+                  width: "350px",
                 }}
               >
-                {(data || [])
-                  .filter(({ id }) => topicIdList.includes(id))
-                  .map(({ topicName }) => topicName)
-                  .join(",")}
+                <ul>
+                  {(data || [])
+                    .filter(({ id }) => topicIdList.includes(id))
+                    .map(({ topicName }) => (
+                      <li>{topicName}</li>
+                    ))}
+                </ul>
               </Editable>
             </UU5.Bricks.Section>
           </UU5.Bricks.Column>

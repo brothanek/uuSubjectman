@@ -8,10 +8,11 @@ import Lsi from "../../../config/lsi";
 function Content({ params }) {
   const [edit, setEdit] = useState(false);
   const [values, setValues] = useState(params);
-  const { id, contentName, contentType, link } = values;
+  const { contentName, contentType, link } = values;
 
   const submitBtn = useLsi(Lsi.common.submit);
   const editBtn = edit ? useLsi(Lsi.common.cancel) : useLsi(Lsi.common.edit);
+  const lsiName = useLsi(Lsi.common.name);
 
   const propsForEditable = { edit, setEdit, setValues, values };
 
@@ -51,7 +52,7 @@ function Content({ params }) {
       <div style={{ marginLeft: "100px" }}>
         <UU5.Bricks.Row>
           <UU5.Bricks.Column width="25%">
-            <UU5.Bricks.Section header="contentType">
+            <UU5.Bricks.Section header={lsiName}>
               <Editable
                 {...propsForEditable}
                 valueType="contentType"

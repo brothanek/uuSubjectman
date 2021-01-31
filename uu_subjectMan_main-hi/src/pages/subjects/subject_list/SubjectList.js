@@ -23,12 +23,18 @@ function SubjectList() {
   });
 
   const lsiName = useLsi(Lsi.common.name);
-  const lsiHeader = useLsi(Lsi.subject.subjectList.header);
+  const lsiHeader = useLsi(Lsi.subject.header);
+  const lsiCredits = useLsi(Lsi.subject.credits);
+  const lsiDegree = useLsi(Lsi.subject.degree);
+  const lsiLanguage = useLsi(Lsi.subject.language);
+  const lsiSubName = useLsi(Lsi.subject.name);
+  const lsiManage = useLsi(Lsi.common.manage);
+  const lsiAdd = useLsi(Lsi.subject.add);
 
   const showModal = useCallback((onSave) => {
     const modal = modalRef.current;
     modal.open({
-      header: "Create Subject",
+      header: lsiSubName,
       content: <SubjectCreate onSave={onSave} modal={modal} />,
     });
   }, []);
@@ -53,7 +59,7 @@ function SubjectList() {
 
   return (
     <div>
-      <UU5.Bricks.Button onClick={handleCreate} content={"Add new Subject"} />
+      <UU5.Bricks.Button onClick={handleCreate} content={lsiAdd} colorSchema="success" />
       {dataListResult?.data.length < 1 ? (
         <h1>{"There are no data to load :("}</h1>
       ) : (
@@ -61,16 +67,16 @@ function SubjectList() {
           <UU5.Bricks.Table.THead>
             <UU5.Bricks.Table.Tr>
               <UU5.Bricks.Table.Th content={lsiName} />
-              <UU5.Bricks.Table.Th content="Credits" />
-              <UU5.Bricks.Table.Th content="Degree" />
-              <UU5.Bricks.Table.Th content="Language" />
-              {UU5.Environment.App.authorization.canManageAll() && <UU5.Bricks.Table.Th content="Manage" />}
+              <UU5.Bricks.Table.Th content={lsiCredits} />
+              <UU5.Bricks.Table.Th content={lsiDegree} />
+              <UU5.Bricks.Table.Th content={lsiLanguage} />
+              {UU5.Environment.App.authorization.canManageAll() && <UU5.Bricks.Table.Th content={lsiManage} />}
             </UU5.Bricks.Table.Tr>
           </UU5.Bricks.Table.THead>
 
           <UU5.Bricks.Table.TBody>
             {(dataListResult?.data || []).map(({ data, handlerMap }) => {
-              const { credits, name, id, degree, language = "" } = data;
+              const { credits, name, degree, language = "" } = data;
               return (
                 <UU5.Bricks.Table.Tr key={data}>
                   <UU5.Bricks.Table.Td

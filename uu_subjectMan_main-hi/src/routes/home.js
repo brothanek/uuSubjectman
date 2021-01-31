@@ -53,11 +53,9 @@ export const Home = createVisualComponent({
     //@@viewOn:render
     const attrs = UU5.Common.VisualComponent.getAttrs(props);
     return (
-        <div {...attrs}>
-          Welcome to uuSubjectman
-
-         <SubjectList />
-        </div>
+      <div {...attrs}>
+        <SubjectList />
+      </div>
     );
     //@@viewOff:render
   },

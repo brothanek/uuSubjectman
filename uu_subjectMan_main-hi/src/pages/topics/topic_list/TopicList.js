@@ -24,11 +24,15 @@ function TopicList() {
 
   const lsiHeader = useLsi(Lsi.topic.topicList.header);
   const lsiName = useLsi(Lsi.common.name);
+  const lsiTopName = useLsi(Lsi.topic.name);
+  const lsiManage = useLsi(Lsi.common.manage);
+  const lsiDelete = useLsi(Lsi.common.delete);
+  const lsiAdd = useLsi(Lsi.topic.add);
 
   const showModal = useCallback((onSave) => {
     const modal = modalRef.current;
     modal.open({
-      header: "Create Topic",
+      header: lsiTopName,
       content: <TopicCreate onSave={onSave} modal={modal} />,
     });
   }, []);
@@ -53,7 +57,7 @@ function TopicList() {
 
   return (
     <div>
-      <UU5.Bricks.Button onClick={handleCreate} content={"Add new Topic"} />
+      <UU5.Bricks.Button onClick={handleCreate} content={lsiAdd} colorSchema="success" />
       {dataListResult?.data.length < 1 ? (
         <h1>{"There are no data to load :("}</h1>
       ) : (
@@ -61,8 +65,7 @@ function TopicList() {
           <UU5.Bricks.Table.THead>
             <UU5.Bricks.Table.Tr>
               <UU5.Bricks.Table.Th content={lsiName} />
-              <UU5.Bricks.Table.Th content={"ID"} />
-              <UU5.Bricks.Table.Th content={"Manage"} />
+              {UU5.Environment.App.authorization.canManageAll() && <UU5.Bricks.Table.Th content={lsiManage} />}
             </UU5.Bricks.Table.Tr>
           </UU5.Bricks.Table.THead>
 
@@ -77,10 +80,11 @@ function TopicList() {
                     />
                   }
                 />
-                <UU5.Bricks.Table.Td content={data?.id} />
-                <UU5.Bricks.Table.Td
-                  content={<UU5.Bricks.Button onClick={() => handlerMap.delete()} content={"Delete"} />}
-                />
+                {UU5.Environment.App.authorization.canManageAll() && (
+                  <UU5.Bricks.Table.Td
+                    content={<UU5.Bricks.Button onClick={() => handlerMap.delete()} content={lsiDelete} />}
+                  />
+                )}
               </UU5.Bricks.Table.Tr>
             ))}
           </UU5.Bricks.Table.TBody>

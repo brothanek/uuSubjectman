@@ -17,8 +17,14 @@ const Lsi = {
       en: "Submit",
     },
     name: { cs: "Název", en: "Name" },
+    manage: { cs: "Spravovat", en: "Manage" },
+    delete: { cs: "Smazat", en: "Delete" },
   },
   topic: {
+    name: { cs: "Téma", en: "Topic" },
+    add: { cs: "Přidat nové téma", en: "Add new topic" },
+    create: { cs: "Vytvořit nové téma", en: "Create new topic" },
+
     topicList: {
       header: { cs: "Seznam témat", en: "Topic list" },
     },
@@ -28,9 +34,20 @@ const Lsi = {
     },
   },
   subject: {
-    subjectList: {
-      header: { cs: "Seznam předmětů", en: "Subject list" },
-    },
+    name: { cs: "Předmět", en: "Subject" },
+    create: { cs: "Vytvořit nový předmět", en: "Create new subject" },
+    add: { cs: "Přidat nový předmět", en: "Add new subject" },
+    header: { cs: "Seznam předmětů", en: "Subject list" },
+    credits: { cs: "Kredity", en: "Credits" },
+    degree: { cs: "Titul", en: "Degree" },
+    language: { cs: "Jazyk", en: "Language" },
+    description: {cs: "Popis", en: "Description"}
+  },
+  content: {
+    create: { cs: "Vytvořit nový digitální obsah", en: "Create new digital content" },
+    name: { cs: "Digitální obsah", en: "Digital content" },
+    add: { cs: "Přidat nový obsah", en: "Add new content" },
+    contentType: { cs: "Typ obsahu", en: "Content type" },
   },
   left: {
     home: {

@@ -1,11 +1,17 @@
 import React from "react";
 import UU5 from "uu5g04";
+import { useLsi } from "uu5g04-hooks";
+import Lsi from "../../../config/lsi";
 
 function ContentCreate({ onSave, modal }) {
+  const lsiCreate = useLsi(Lsi.content.create);
+  const lsiName = useLsi(Lsi.common.name);
+  const lsiType = useLsi(Lsi.content.contentType);
+
   return (
     <div>
       <UU5.Forms.Form
-        header={<UU5.Bricks.Box content="Create new digital content" colorSchema="green" className="font-size-m" />}
+        header={<UU5.Bricks.Box content={lsiCreate} colorSchema="green" className="font-size-m" />}
         onSave={onSave}
         onSaveDone={() => {
           modal.close();
@@ -22,12 +28,12 @@ function ContentCreate({ onSave, modal }) {
         <UU5.Forms.Text
           pattern="[A-Za-z]{5}"
           patternMessage="Insert at least 5 characters"
-          label="Content name"
+          label={lsiName}
           name="contentName"
           placeholder="Content name"
           required
         />
-        <UU5.Forms.Select label="Content Type" name="contentType" placeholder="Content type" required>
+        <UU5.Forms.Select label={lsiType} name="contentType" placeholder="Content type" required>
           <UU5.Forms.Select.Option value="uuCourse" />
           <UU5.Forms.Select.Option value="uuBook" />
           <UU5.Forms.Select.Option value="document" />

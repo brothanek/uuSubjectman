@@ -22,6 +22,7 @@ function Topic({ params }) {
 
   const submitBtn = useLsi(Lsi.common.submit);
   const primaryBtn = edit ? useLsi(Lsi.common.cancel) : useLsi(Lsi.common.edit);
+  const lsiDigitalContent = useLsi(Lsi.content.name);
 
   const propsForEditable = { edit, setEdit, setValues, values };
 
@@ -59,18 +60,22 @@ function Topic({ params }) {
         }}
       />
       <div style={{ marginLeft: "100px" }}>
-        <UU5.Bricks.Section header="Content">
+        <UU5.Bricks.Section header={lsiDigitalContent}>
           <Editable
+            style={{ width: "650px" }}
             {...propsForEditable}
             valueType="contentIdList"
             options={(data || []).map((item) => ({ ...item, name: item.contentName }))}
             multiple
             inputType="select"
           >
-            {(data || [])
-              .filter(({ id }) => contentIdList.includes(id))
-              .map(({ contentName }) => contentName)
-              .join(",")}
+            <ul>
+              {(data || [])
+                .filter(({ id }) => contentIdList.includes(id))
+                .map(({ contentName }) => (
+                  <li>{contentName}</li>
+                ))}
+            </ul>
           </Editable>
         </UU5.Bricks.Section>
 
