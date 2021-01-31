@@ -6,7 +6,7 @@ export default class {
   constructor(userProfiles) {
     this.userProfiles = userProfiles;
     // precalculate rights ... once
-    this._isInHeadMasterProfile = UU5.Common.Tools.hasProfile(this.userProfiles, Config.PROFILES.HEADMASTER);
+    this._isInHeadMasterProfile = UU5.Common.Tools.hasProfile(this.userProfiles, Config.PROFILES.HEADMASTERS);
     this._isInTeacherProfile = UU5.Common.Tools.hasProfile(this.userProfiles, Config.PROFILES.TEACHERS);
     this._isInStudentProfile = UU5.Common.Tools.hasProfile(this.userProfiles, Config.PROFILES.STUDENTS);
   }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import UU5 from "uu5g04";
-import { useLsi } from "uu5g04-hooks";
+import { useLsi, useDataList } from "uu5g04-hooks";
 import Calls from "calls";
 import Editable from "../../../components/Editable";
 import Lsi from "../../../config/lsi";
@@ -8,12 +8,24 @@ import Lsi from "../../../config/lsi";
 function Subject({ params }) {
   const [edit, setEdit] = useState(false);
   const [values, setValues] = useState(params);
-  const { id, subjectName, credits, degree, languages, description, topicIdList, state } = values;
+  const { id, name, credits, degree, language, description, topicIdList } = values;
+  console.log(values);
 
   const submitBtn = useLsi(Lsi.common.submit);
   const editBtn = edit ? useLsi(Lsi.common.cancel) : useLsi(Lsi.common.edit);
 
   const propsForEditable = { edit, setEdit, setValues, values };
+
+  const dataListResult = useDataList({
+    pageSize: 50,
+    handlerMap: {
+      load: Calls.listTopics,
+    },
+    itemHandlerMap: {
+      delete: Calls.deleteSubject,
+    },
+  });
+  const data = (dataListResult?.data || []).map(({ data }) => data);
 
   const handleSubmit = async () => {
     try {
@@ -38,8 +50,8 @@ function Subject({ params }) {
         level="1"
         content={
           <div style={{ fontSize: "50px", marginLeft: "100px" }}>
-            <Editable edit={edit} setEdit={setEdit} setValues={setValues} values={values} valueType="subjectName">
-              {subjectName || ""}
+            <Editable edit={edit} setEdit={setEdit} setValues={setValues} values={values} valueType="name">
+              {name || ""}
             </Editable>
           </div>
         }
@@ -58,7 +70,7 @@ function Subject({ params }) {
                 inputType="select"
                 options={["bc", "ing"]}
                 style={{
-                  width: "100px",
+                  width: "70px",
                 }}
               >
                 {degree || ""}
@@ -81,18 +93,17 @@ function Subject({ params }) {
             </UU5.Bricks.Section>
           </UU5.Bricks.Column>
           <UU5.Bricks.Column width="25%">
-            <UU5.Bricks.Section header="Languages">
+            <UU5.Bricks.Section header="Language">
               <Editable
                 {...propsForEditable}
                 inputType="select"
-                multiple
-                options={["EN", "CZ"]}
-                valueType="languages"
+                options={["en", "cz"]}
+                valueType="language"
                 style={{
-                  width: "150px",
+                  width: "70px",
                 }}
               >
-                {(languages || []).join(",")}
+                {language}
               </Editable>
             </UU5.Bricks.Section>
           </UU5.Bricks.Column>
@@ -102,13 +113,16 @@ function Subject({ params }) {
                 {...propsForEditable}
                 inputType="select"
                 multiple
-                options={["1", "2", "..."]} // TODO - get all topics from database
+                options={(data || []).map((item) => ({ ...item, name: item.topicName }))}
                 valueType="topicIdList"
                 style={{
                   width: "150px",
                 }}
               >
-                {(topicIdList || []).join(",")}
+                {(data || [])
+                  .filter(({ id }) => topicIdList.includes(id))
+                  .map(({ topicName }) => topicName)
+                  .join(",")}
               </Editable>
             </UU5.Bricks.Section>
           </UU5.Bricks.Column>

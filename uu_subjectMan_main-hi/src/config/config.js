@@ -15,7 +15,7 @@ export default {
   ),
 
   PROFILES: {
-    HEADMASTER: "Headmaster",
+    HEADMASTERS: "HeadMasters",
     TEACHERS: "Teachers",
     STUDENTS: "Students",
   },
