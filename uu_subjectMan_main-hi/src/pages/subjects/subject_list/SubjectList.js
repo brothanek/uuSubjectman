@@ -10,7 +10,7 @@ function SubjectList() {
   const modalRef = useRef();
   const alertBusRef = useRef();
   const unmountedRef = useUnmountedRef();
-  const pageSize = 8;
+  const pageSize = 50;
   const dataListResult = useDataList({
     pageSize,
     handlerMap: {
