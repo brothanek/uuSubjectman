@@ -4,7 +4,8 @@ const { ObjectId } = require("bson");
 
 class topicMongo extends UuObjectDao {
   async createSchema() {
-    await super.createIndex({ awid: 1 }, { unique: true });
+    await super.createIndex({ awid: 1, _id: 1 }, { unique: true });
+    await super.createIndex({ awid: 1, topicName: 1 }, { unique: true });
   }
 
   async create(uuObject) {

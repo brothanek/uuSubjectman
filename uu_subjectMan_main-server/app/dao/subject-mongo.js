@@ -3,7 +3,11 @@ const { UuObjectDao } = require("uu_appg01_server").ObjectStore;
 
 class subjectMongo extends UuObjectDao {
   async createSchema() {
-    await super.createIndex({ awid: 1 }, { unique: true });
+    await super.createIndex({ awid: 1, _id: 1 }, { unique: true });
+    await super.createIndex({ awid: 1, name: 1, degree: 1, language: 1 }, { unique: true });
+    await super.createIndex({ awid: 1 , degree: 1 });
+    await super.createIndex({ awid: 1 , language: 1 });
+
   }
 
   async create(uuObject) {

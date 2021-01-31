@@ -5,6 +5,7 @@ const { ObjectId } = require("bson");
 class digitalContentMongo extends UuObjectDao {
   async createSchema() {
     await super.createIndex({ awid: 1 }, { unique: true });
+    await super.createIndex({ awid: 1 , contentName: 1, contentType: 1 }, { unique: true });
   }
 
   async create(uuObject) {

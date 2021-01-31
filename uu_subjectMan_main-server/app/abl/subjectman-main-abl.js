@@ -49,7 +49,7 @@ class SubjectmanMainAbl {
       Errors.Init.InvalidDtoIn
     );
 
-    const schemas = ["subjectman"];
+    const schemas = ["subjectman","digitalContent","subject","topic"];
     let schemaCreateResults = schemas.map(async (schema) => {
       try {
         return await DaoFactory.getDao(schema).createSchema();
