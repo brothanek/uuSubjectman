@@ -35,6 +35,10 @@ let Calls = {
     let commandUri = Calls.getCommandUri("topic/create");
     return Calls.call("post", commandUri, dtoIn);
   },
+  deleteTopic(dtoIn) {
+    let commandUri = Calls.getCommandUri("topic/remove");
+    return Calls.call("post", commandUri, dtoIn);
+  },
 
   // subjects
 
@@ -49,6 +53,10 @@ let Calls = {
   },
   createSubject(dtoIn) {
     let commandUri = Calls.getCommandUri("subject/create");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+  deleteSubject(dtoIn) {
+    let commandUri = Calls.getCommandUri("subject/remove");
     return Calls.call("post", commandUri, dtoIn);
   },
 

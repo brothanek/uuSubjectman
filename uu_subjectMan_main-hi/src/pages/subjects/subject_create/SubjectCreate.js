@@ -1,12 +1,21 @@
 import React from "react";
 import UU5 from "uu5g04";
+import { useLsi, useDataList } from "uu5g04-hooks";
+import Calls from "calls";
 
-const data = [
-  { id: "1", topicName: "Zaklady JS", contentId: [12, 23] },
-  { id: "2", topicName: "Advanced JS", contentId: [1, 3] },
-];
 
 function SubjectCreate({ onSave, modal }) {
+  const dataListResult = useDataList({
+    pageSize: 50,
+    handlerMap: {
+      load: Calls.listTopics,
+    },
+    itemHandlerMap: {
+      delete: Calls.deleteSubject,
+    },
+  });
+  const data = (dataListResult?.data || []).map(({ data }) => data);
+
   return (
     <div>
       <UU5.Forms.Form
@@ -28,7 +37,7 @@ function SubjectCreate({ onSave, modal }) {
           pattern="[A-Za-z]{5}"
           patternMessage="Insert at least 5 characters"
           label="Subject"
-          name="subjectName"
+          name="name"
           placeholder="Subject name"
           required
         />
@@ -45,9 +54,9 @@ function SubjectCreate({ onSave, modal }) {
           <UU5.Forms.Select.Option value="bc" />
         </UU5.Forms.Select>
 
-        <UU5.Forms.Select label="Languages" name="languages" placeholder="EN or CZ" required>
-          <UU5.Forms.Select.Option value="CZ" />
-          <UU5.Forms.Select.Option value="EN" />
+        <UU5.Forms.Select label="Languages" name="language" placeholder="EN or CZ" required>
+          <UU5.Forms.Select.Option value="cz" />
+          <UU5.Forms.Select.Option value="en" />
         </UU5.Forms.Select>
         <UU5.Forms.TextArea
           label="Description"
@@ -57,12 +66,17 @@ function SubjectCreate({ onSave, modal }) {
           placeholder="Description..."
           required
         />
-        <UU5.Forms.Select multiple label="Topics" name="topics" placeholder="Topic" required>
-          {data.map(({ topicName }) => (
-            <UU5.Forms.Select.Option value={topicName} />
+        <UU5.Forms.Select multiple label="Topics" name="topicIdList" placeholder="Topic" required>
+          {(data || []).map(({ topicName, id }) => (
+            <UU5.Forms.Select.Option value={id}>{topicName}</UU5.Forms.Select.Option>
           ))}
         </UU5.Forms.Select>
-        <UU5.Forms.Controls buttonSubmitProps={{ content: "Create" }} />
+        <UU5.Forms.Controls
+          onSave={(props) => {
+            console.log(props);
+          }}
+          buttonSubmitProps={{ content: "Create" }}
+        />
       </UU5.Forms.Form>
     </div>
   );

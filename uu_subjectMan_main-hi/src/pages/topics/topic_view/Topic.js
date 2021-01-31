@@ -63,11 +63,14 @@ function Topic({ params }) {
           <Editable
             {...propsForEditable}
             valueType="contentIdList"
-            options={data.map((item) => ({ ...item, name: item.contentName }))}
+            options={(data || []).map((item) => ({ ...item, name: item.contentName }))}
             multiple
             inputType="select"
           >
-            {(data || []).map(({ contentName }) => contentName).join(",")}
+            {(data || [])
+              .filter(({ id }) => contentIdList.includes(id))
+              .map(({ contentName }) => contentName)
+              .join(",")}
           </Editable>
         </UU5.Bricks.Section>
 
