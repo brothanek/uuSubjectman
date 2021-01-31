@@ -21,7 +21,7 @@ function ContentList() {
       delete: Calls.deleteContent,
     },
   });
-  const lsiHeader = useLsi(Lsi.subject.header);
+  const lsiHeader = useLsi(Lsi.content.name);
   const lsiName = useLsi(Lsi.common.name);
   const lsiManage = useLsi(Lsi.common.manage);
   const lsiContentType = useLsi(Lsi.content.contentType);
