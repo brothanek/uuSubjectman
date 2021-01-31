@@ -72,8 +72,13 @@ function Topic({ params }) {
             <ul>
               {(data || [])
                 .filter(({ id }) => contentIdList.includes(id))
-                .map(({ contentName }) => (
-                  <li>{contentName}</li>
+                .map((data) => (
+                  <li>
+                    <UU5.Bricks.Link
+                      onClick={() => UU5.Environment.getRouter().setRoute("content", data)}
+                      content={data.contentName}
+                    />
+                  </li>
                 ))}
             </ul>
           </Editable>
