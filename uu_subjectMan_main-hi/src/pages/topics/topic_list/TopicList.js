@@ -23,7 +23,7 @@ function TopicList() {
   });
 
   const lsiHeader = useLsi(Lsi.topic.topicList.header);
-  const lsiName = useLsi(Lsi.topic.topicList.name);
+  const lsiName = useLsi(Lsi.common.name);
 
   const showModal = useCallback((onSave) => {
     const modal = modalRef.current;
@@ -78,7 +78,9 @@ function TopicList() {
                   }
                 />
                 <UU5.Bricks.Table.Td content={data?.id} />
-                <UU5.Bricks.Table.Td content={<UU5.Bricks.Button onClick={handlerMap.delete} content={"Delete"} />} />
+                <UU5.Bricks.Table.Td
+                  content={<UU5.Bricks.Button onClick={() => handlerMap.delete()} content={"Delete"} />}
+                />
               </UU5.Bricks.Table.Tr>
             ))}
           </UU5.Bricks.Table.TBody>
