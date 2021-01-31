@@ -5,8 +5,7 @@ const subjectCreateDtoInType = shape({
   language: oneOf(["cz","en"]).isRequired(),
   topicIdList: array(id(), 10),
   description: string(16000),
-  degree: oneOf(["ing","bc"]),
-  state: oneOf(["draft","active",])
+  degree: oneOf(["ing","bc"])
 });
 const subjectGetDtoInType = shape({
   id: id().isRequired()
@@ -21,8 +20,7 @@ const subjectEditDtoInType = shape({
   language: oneOf(["cz","en"]),
   topicIdList: array(id(), 10),
   description: string(16000),
-  degree: oneOf(["ing","bc"]),
-  state: oneOf(["draft","active"])
+  degree: oneOf(["ing","bc"])
 });
 const subjectListDtoInType = shape({
   sortBy: oneOf(["name"]),
